@@ -18,6 +18,10 @@
 		04E41C722BA473470095C411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E41C712BA473470095C411 /* Assets.xcassets */; };
 		04E41C762BA473470095C411 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 04E41C662BA473460095C411 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04E41C7C2BA475520095C411 /* SharedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C7B2BA475520095C411 /* SharedValue.swift */; };
+		04E41C822BA47BAF0095C411 /* SwipeTabsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C812BA47BAF0095C411 /* SwipeTabsDemo.swift */; };
+		04E41C842BA47C620095C411 /* ListsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C832BA47C620095C411 /* ListsDemo.swift */; };
+		04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C852BA487FC0095C411 /* AnonymousView.swift */; };
+		04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C872BA4881C0095C411 /* AuthenticatedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,10 @@
 		04E41C7B2BA475520095C411 /* SharedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValue.swift; sourceTree = "<group>"; };
 		04E41C7D2BA476850095C411 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		04E41C7E2BA476B20095C411 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		04E41C812BA47BAF0095C411 /* SwipeTabsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTabsDemo.swift; sourceTree = "<group>"; };
+		04E41C832BA47C620095C411 /* ListsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsDemo.swift; sourceTree = "<group>"; };
+		04E41C852BA487FC0095C411 /* AnonymousView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousView.swift; sourceTree = "<group>"; };
+		04E41C872BA4881C0095C411 /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +112,11 @@
 		04490B542BA46AB5009E5034 /* GoogleSheetsWidget */ = {
 			isa = PBXGroup;
 			children = (
+				04E41C7F2BA47B7C0095C411 /* Views */,
 				04E41C7D2BA476850095C411 /* Entitlements.entitlements */,
 				04490B552BA46AB5009E5034 /* Application.swift */,
-				04490B572BA46AB5009E5034 /* ContentView.swift */,
 				04490B592BA46AB7009E5034 /* Assets.xcassets */,
 				04490B5B2BA46AB7009E5034 /* Preview Content */,
-				04E41C7B2BA475520095C411 /* SharedValue.swift */,
 			);
 			path = GoogleSheetsWidget;
 			sourceTree = "<group>";
@@ -141,6 +148,27 @@
 				04E41C732BA473470095C411 /* Info.plist */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		04E41C7F2BA47B7C0095C411 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04E41C802BA47B990095C411 /* Playgrounds */,
+				04490B572BA46AB5009E5034 /* ContentView.swift */,
+				04E41C7B2BA475520095C411 /* SharedValue.swift */,
+				04E41C852BA487FC0095C411 /* AnonymousView.swift */,
+				04E41C872BA4881C0095C411 /* AuthenticatedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		04E41C802BA47B990095C411 /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				04E41C812BA47BAF0095C411 /* SwipeTabsDemo.swift */,
+				04E41C832BA47C620095C411 /* ListsDemo.swift */,
+			);
+			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,7 +273,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04490B582BA46AB5009E5034 /* ContentView.swift in Sources */,
+				04E41C822BA47BAF0095C411 /* SwipeTabsDemo.swift in Sources */,
 				04E41C7C2BA475520095C411 /* SharedValue.swift in Sources */,
+				04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */,
+				04E41C842BA47C620095C411 /* ListsDemo.swift in Sources */,
+				04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */,
 				04490B562BA46AB5009E5034 /* Application.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
