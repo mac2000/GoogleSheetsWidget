@@ -6,20 +6,6 @@
 	objectVersion = 56;
 	objects = {
 
-/* Begin PBXFileReference section */
-		04490B412BA46703009E5034 /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		04490B3E2BA46703009E5034 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
 /* Begin PBXGroup section */
 		04490B112BA465DD009E5034 = {
 			isa = PBXGroup;
@@ -31,32 +17,11 @@
 		04490B1B2BA465DD009E5034 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04490B412BA46703009E5034 /* Application.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		04490B402BA46703009E5034 /* Application */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 04490B4C2BA46704009E5034 /* Build configuration list for PBXNativeTarget "Application" */;
-			buildPhases = (
-				04490B3D2BA46703009E5034 /* Sources */,
-				04490B3E2BA46703009E5034 /* Frameworks */,
-				04490B3F2BA46703009E5034 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Application;
-			productName = Application;
-			productReference = 04490B412BA46703009E5034 /* Application.app */;
-			productType = "com.apple.product-type.application";
-		};
-/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		04490B122BA465DD009E5034 /* Project object */ = {
@@ -65,11 +30,6 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
-				TargetAttributes = {
-					04490B402BA46703009E5034 = {
-						CreatedOnToolsVersion = 15.3;
-					};
-				};
 			};
 			buildConfigurationList = 04490B152BA465DD009E5034 /* Build configuration list for PBXProject "GoogleSheetsWidget" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -84,30 +44,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				04490B402BA46703009E5034 /* Application */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		04490B3F2BA46703009E5034 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		04490B3D2BA46703009E5034 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		04490B262BA465DF009E5034 /* Debug */ = {
@@ -229,76 +168,6 @@
 			};
 			name = Release;
 		};
-		04490B4D2BA46704009E5034 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Application/Preview Content\"";
-				DEVELOPMENT_TEAM = J7ZQRKLMXS;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Google Sheets Widget";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ua.org.mac-blog.GoogleSheetsWidget.Application";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		04490B4E2BA46704009E5034 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Application/Preview Content\"";
-				DEVELOPMENT_TEAM = J7ZQRKLMXS;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Google Sheets Widget";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ua.org.mac-blog.GoogleSheetsWidget.Application";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -307,15 +176,6 @@
 			buildConfigurations = (
 				04490B262BA465DF009E5034 /* Debug */,
 				04490B272BA465DF009E5034 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		04490B4C2BA46704009E5034 /* Build configuration list for PBXNativeTarget "Application" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				04490B4D2BA46704009E5034 /* Debug */,
-				04490B4E2BA46704009E5034 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
