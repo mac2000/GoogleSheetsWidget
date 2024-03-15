@@ -17,6 +17,7 @@
 		04E41C702BA473460095C411 /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C6F2BA473460095C411 /* Widgets.swift */; };
 		04E41C722BA473470095C411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E41C712BA473470095C411 /* Assets.xcassets */; };
 		04E41C762BA473470095C411 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 04E41C662BA473460095C411 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04E41C7C2BA475520095C411 /* SharedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C7B2BA475520095C411 /* SharedValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,9 @@
 		04E41C6F2BA473460095C411 /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
 		04E41C712BA473470095C411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04E41C732BA473470095C411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04E41C7B2BA475520095C411 /* SharedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValue.swift; sourceTree = "<group>"; };
+		04E41C7D2BA476850095C411 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		04E41C7E2BA476B20095C411 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +104,12 @@
 		04490B542BA46AB5009E5034 /* GoogleSheetsWidget */ = {
 			isa = PBXGroup;
 			children = (
+				04E41C7D2BA476850095C411 /* Entitlements.entitlements */,
 				04490B552BA46AB5009E5034 /* Application.swift */,
 				04490B572BA46AB5009E5034 /* ContentView.swift */,
 				04490B592BA46AB7009E5034 /* Assets.xcassets */,
 				04490B5B2BA46AB7009E5034 /* Preview Content */,
+				04E41C7B2BA475520095C411 /* SharedValue.swift */,
 			);
 			path = GoogleSheetsWidget;
 			sourceTree = "<group>";
@@ -128,6 +134,7 @@
 		04E41C6C2BA473460095C411 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				04E41C7E2BA476B20095C411 /* Entitlements.entitlements */,
 				04E41C6D2BA473460095C411 /* WidgetsBundle.swift */,
 				04E41C6F2BA473460095C411 /* Widgets.swift */,
 				04E41C712BA473470095C411 /* Assets.xcassets */,
@@ -238,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04490B582BA46AB5009E5034 /* ContentView.swift in Sources */,
+				04E41C7C2BA475520095C411 /* SharedValue.swift in Sources */,
 				04490B562BA46AB5009E5034 /* Application.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +395,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoogleSheetsWidget/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GoogleSheetsWidget/Preview Content\"";
@@ -423,6 +432,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoogleSheetsWidget/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GoogleSheetsWidget/Preview Content\"";
@@ -458,6 +468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = Widgets/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J7ZQRKLMXS;
@@ -474,9 +485,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ua.org.mac-blog.GoogleSheetsWidget.Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -485,6 +500,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = Widgets/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = J7ZQRKLMXS;
@@ -501,9 +517,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ua.org.mac-blog.GoogleSheetsWidget.Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

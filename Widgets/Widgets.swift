@@ -7,12 +7,14 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct Provider: TimelineProvider {
+    @AppStorage("value", store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) private var value: String = ""
+    
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), value: "X")
+        SimpleEntry(date: Date(), value: value)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), value: "X")
+        let entry = SimpleEntry(date: Date(), value: value)
         completion(entry)
     }
 
@@ -23,7 +25,7 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, value: "X")
+            let entry = SimpleEntry(date: entryDate, value: value)
             entries.append(entry)
         }
 
