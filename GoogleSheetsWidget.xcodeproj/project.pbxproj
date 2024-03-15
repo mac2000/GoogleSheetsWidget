@@ -68,6 +68,7 @@
 		04E41C832BA47C620095C411 /* ListsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsDemo.swift; sourceTree = "<group>"; };
 		04E41C852BA487FC0095C411 /* AnonymousView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousView.swift; sourceTree = "<group>"; };
 		04E41C872BA4881C0095C411 /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
+		04E41C892BA48C750095C411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +113,7 @@
 		04490B542BA46AB5009E5034 /* GoogleSheetsWidget */ = {
 			isa = PBXGroup;
 			children = (
+				04E41C892BA48C750095C411 /* Info.plist */,
 				04E41C7F2BA47B7C0095C411 /* Views */,
 				04E41C7D2BA476850095C411 /* Entitlements.entitlements */,
 				04490B552BA46AB5009E5034 /* Application.swift */,
@@ -434,6 +436,7 @@
 				DEVELOPMENT_TEAM = J7ZQRKLMXS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoogleSheetsWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Google Sheets Widget";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -471,6 +474,7 @@
 				DEVELOPMENT_TEAM = J7ZQRKLMXS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GoogleSheetsWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Google Sheets Widget";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

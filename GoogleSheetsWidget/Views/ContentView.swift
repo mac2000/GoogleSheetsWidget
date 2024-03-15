@@ -1,14 +1,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("refresh_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var refreshToken: String?
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if refreshToken == nil {
+            AnonymousView()
+        } else {
+            AuthenticatedView()
         }
-        .padding()
     }
 }
 
