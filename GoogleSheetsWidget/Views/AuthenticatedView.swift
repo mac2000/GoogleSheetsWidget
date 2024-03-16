@@ -3,10 +3,10 @@ import SwiftUI
 struct AuthenticatedView: View {
     var body: some View {
         TabView{
-            WatchingList().tabItem {
-                Label("Sheets", systemImage: "doc.text")
+            WatchingListView().tabItem {
+                Label("Data", systemImage: "doc.text")
             }
-            Text("Widgets").tabItem {
+            WidgetsView().tabItem {
                 Label("Widgets", systemImage: "square.grid.3x2")
             }
             InfoView().tabItem {

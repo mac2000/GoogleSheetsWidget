@@ -6,5 +6,9 @@
 	<array>
 		<string>group.GoogleSheetsWidget</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)group.GoogleSheetsWidget</string>
+	</array>
 </dict>
 </plist>

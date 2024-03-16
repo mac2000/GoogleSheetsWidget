@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct InfoView: View {
+    @Environment(Auth.self) var auth
     @State private var message = "Authenticated"
     @AppStorage("access_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var accessToken: String?
     @AppStorage("refresh_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var refreshToken: String?
@@ -8,23 +9,17 @@ struct InfoView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header:Text("Message")) {
+                Section("Message") {
                     Text(message)
                 }
-                Section {
-                    Button("Logout", action: logout)
+                Section("Actions") {
+                    Button("Logout", action: auth.logout)
                     Button("Refresh", action: renew)
                     Button("Demo", action: demo)
                 }
             }
             .navigationBarTitle("Settings")
         }
-    }
-    
-    func logout() {
-        print("logout")
-        accessToken = nil
-        refreshToken = nil
     }
     
     func demo() {
@@ -69,50 +64,30 @@ struct InfoView: View {
     }
     
     func renew() {
-        var parameters = URLComponents()
-        parameters.queryItems = [
-            URLQueryItem(name: "grant_type", value: "refresh_token"),
-            URLQueryItem(name: "refresh_token", value: refreshToken),
-            URLQueryItem(name: "client_id", value: "165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58.apps.googleusercontent.com")
-        ]
-        
-        var request = URLRequest(url: URL(string: "https://oauth2.googleapis.com/token")!)
-        request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpBody = parameters.query?.data(using: .utf8)
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                message = error.localizedDescription
-                return
-            }
-            guard let data = data else {
-                print("No data received")
-                message = "No data"
-                return
-            }
+        Task {
             do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    if let accessToken = json["access_token"] as? String {
-                        self.accessToken = accessToken
-                        print("refreshed")
-                        message = "Refreshed"
-                    } else {
-                        print("token missing in json")
-                        self.accessToken = nil
-                        self.refreshToken = nil
-                        message = "token missing"
-                    }
-                }
+                let accessToken = try await auth.refresh()
+                print("refreshed")
+                print(accessToken ?? "N/A")
+                message = "refreshed"
             } catch {
                 print(error.localizedDescription)
                 message = error.localizedDescription
             }
-        }.resume()
+        }
     }
 }
 
 #Preview {
-    InfoView()
+    TabView(selection: .constant(3)) {
+        WatchingListView().tabItem {
+            Label("Data", systemImage: "doc.text")
+        }.tag(1)
+        WidgetsView().tabItem {
+            Label("Widgets", systemImage: "square.grid.3x2")
+        }.tag(2)
+        InfoView().tabItem {
+            Label("Settings", systemImage: "gear")
+        }.tag(3)
+    }
 }

@@ -1,12 +1,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage("refresh_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var refreshToken: String?
+    @Environment(Auth.self) var auth
+    //@AppStorage("refresh_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var refreshToken: String?
     var body: some View {
-        if refreshToken == nil {
-            AnonymousView()
-        } else {
-            AuthenticatedView()
+        Group {
+            if auth.isAuthenticated {
+                AuthenticatedView()
+            } else {
+                AnonymousView()
+            }
+        }
+        .onAppear {
+            print("isAuthenticated: " + (auth.isAuthenticated ? "Y" : "N"))
         }
     }
 }

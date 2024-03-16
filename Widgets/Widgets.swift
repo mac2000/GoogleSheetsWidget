@@ -7,18 +7,19 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct Provider: TimelineProvider {
-    @AppStorage("value", store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) private var value: String = ""
+    let auth = Auth()
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), value: value)
+        SimpleEntry(date: Date(), value: "N/A")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), value: value)
+        let entry = SimpleEntry(date: Date(), value: "N/A")
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        var value = "X" // auth.demo() ?? "unknown"
         var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
