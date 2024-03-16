@@ -25,4 +25,5 @@ struct WidgetsView: View {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }
+    .environment(Auth())
 }

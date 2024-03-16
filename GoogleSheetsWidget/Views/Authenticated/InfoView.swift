@@ -1,6 +1,8 @@
 import SwiftUI
+import OSLog
 
 struct InfoView: View {
+    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "InfoView")
     @Environment(Auth.self) var auth
     @State private var message = "Authenticated"
     @AppStorage("access_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var accessToken: String?
@@ -29,12 +31,12 @@ struct InfoView: View {
         request.setValue("Bearer \(accessToken!)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                print("Error: \(error)")
+                log.error("\(error)")
                 message = error.localizedDescription
                 return
             }
             guard let data = data else {
-                print("No data received")
+                log.warning("no data")
                 message = "No data"
                 return
             }
@@ -42,7 +44,7 @@ struct InfoView: View {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                     
                     if let files = json["files"] as? [Any] {
-                        print("Got \(files.count) files")
+                        log.info("Got \(files.count) files")
                         message = "Got \(files.count) files"
                     } else {
                         if let error = json["error"] as? [String: Any] {
@@ -57,7 +59,7 @@ struct InfoView: View {
                     }
                 }
             } catch {
-                print(error.localizedDescription)
+                log.warning("\(error.localizedDescription)")
                 message = error.localizedDescription
             }
         }.resume()
@@ -67,11 +69,10 @@ struct InfoView: View {
         Task {
             do {
                 let accessToken = try await auth.refresh()
-                print("refreshed")
-                print(accessToken ?? "N/A")
+                log.info("refreshed")
                 message = "refreshed"
             } catch {
-                print(error.localizedDescription)
+                log.error("\(error.localizedDescription)")
                 message = error.localizedDescription
             }
         }
@@ -90,4 +91,5 @@ struct InfoView: View {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }
+    .environment(Auth())
 }

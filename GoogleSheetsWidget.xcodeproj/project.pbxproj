@@ -17,9 +17,6 @@
 		04E41C702BA473460095C411 /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C6F2BA473460095C411 /* Widgets.swift */; };
 		04E41C722BA473470095C411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E41C712BA473470095C411 /* Assets.xcassets */; };
 		04E41C762BA473470095C411 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 04E41C662BA473460095C411 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		04E41C7C2BA475520095C411 /* SharedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C7B2BA475520095C411 /* SharedValue.swift */; };
-		04E41C822BA47BAF0095C411 /* SwipeTabsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C812BA47BAF0095C411 /* SwipeTabsDemo.swift */; };
-		04E41C842BA47C620095C411 /* ListsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C832BA47C620095C411 /* ListsDemo.swift */; };
 		04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C852BA487FC0095C411 /* AnonymousView.swift */; };
 		04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C872BA4881C0095C411 /* AuthenticatedView.swift */; };
 		04E41C8C2BA49B2D0095C411 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C8B2BA49B2D0095C411 /* InfoView.swift */; };
@@ -69,11 +66,8 @@
 		04E41C6F2BA473460095C411 /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
 		04E41C712BA473470095C411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04E41C732BA473470095C411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04E41C7B2BA475520095C411 /* SharedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValue.swift; sourceTree = "<group>"; };
 		04E41C7D2BA476850095C411 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		04E41C7E2BA476B20095C411 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
-		04E41C812BA47BAF0095C411 /* SwipeTabsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTabsDemo.swift; sourceTree = "<group>"; };
-		04E41C832BA47C620095C411 /* ListsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsDemo.swift; sourceTree = "<group>"; };
 		04E41C852BA487FC0095C411 /* AnonymousView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousView.swift; sourceTree = "<group>"; };
 		04E41C872BA4881C0095C411 /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
 		04E41C892BA48C750095C411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -174,22 +168,11 @@
 			children = (
 				04E41D442BA5BF890095C411 /* Spreadsheets */,
 				04E41C8A2BA49B1F0095C411 /* Authenticated */,
-				04E41C802BA47B990095C411 /* Playgrounds */,
 				04490B572BA46AB5009E5034 /* ContentView.swift */,
-				04E41C7B2BA475520095C411 /* SharedValue.swift */,
 				04E41C852BA487FC0095C411 /* AnonymousView.swift */,
 				04E41C872BA4881C0095C411 /* AuthenticatedView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		04E41C802BA47B990095C411 /* Playgrounds */ = {
-			isa = PBXGroup;
-			children = (
-				04E41C812BA47BAF0095C411 /* SwipeTabsDemo.swift */,
-				04E41C832BA47C620095C411 /* ListsDemo.swift */,
-			);
-			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 		04E41C8A2BA49B1F0095C411 /* Authenticated */ = {
@@ -321,15 +304,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04490B582BA46AB5009E5034 /* ContentView.swift in Sources */,
-				04E41C822BA47BAF0095C411 /* SwipeTabsDemo.swift in Sources */,
 				04E41CDD2BA571E20095C411 /* WidgetsView.swift in Sources */,
-				04E41C7C2BA475520095C411 /* SharedValue.swift in Sources */,
 				04E41D462BA5BF990095C411 /* SpreadsheetPicker.swift in Sources */,
 				04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */,
 				04E41C8C2BA49B2D0095C411 /* InfoView.swift in Sources */,
 				04E41D402BA5A05E0095C411 /* Data.swift in Sources */,
 				04E41C8E2BA4A6340095C411 /* WatchingListView.swift in Sources */,
-				04E41C842BA47C620095C411 /* ListsDemo.swift in Sources */,
 				04E41D432BA5B6BE0095C411 /* WatcherFormView.swift in Sources */,
 				04E41D482BA5C3360095C411 /* Auth.swift in Sources */,
 				04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */,

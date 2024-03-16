@@ -46,6 +46,7 @@ struct WatcherFormView: View {
                 Label("Settings", systemImage: "gear")
             }.tag(3)
         }
+        .environment(Auth())
         .modelContainer(container)
     } catch {
         fatalError("failed to create model container because of: \(error.localizedDescription)")

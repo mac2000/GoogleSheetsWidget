@@ -1,9 +1,9 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 struct WatchingListView: View {
-    @AppStorage("access_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var accessToken: String?
-    @AppStorage("refresh_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var refreshToken: String?
+    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "WatchingListView")
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Watcher.title) var items: [Watcher]
     @State private var path = NavigationPath()
@@ -18,7 +18,7 @@ struct WatchingListView: View {
                                 VStack(alignment:.leading){
                                     Text(item.title)
                                     HStack{
-                                        Text("\(item.sheetName)!\(item.column)\(item.row)")
+                                        Text("\(item.sheetName ?? "unknown")!\(item.column)\(item.row)")
                                         Text("/")
                                         Text(item.spreadsheetName ?? "unknown")
                                     }.font(.caption).foregroundStyle(.secondary).lineLimit(1)
@@ -47,6 +47,13 @@ struct WatchingListView: View {
             .navigationDestination(for: Watcher.self) { item in
                 WatcherFormView(item: item)
             }
+            .onAppear {
+                for item in items {
+                    if item.isEmpty {
+                        modelContext.delete(item)
+                    }
+                }
+            }
         }
     }
     
@@ -65,7 +72,7 @@ struct WatchingListView: View {
     
     func refresh() {
         for item in items {
-            print(item.title)
+            log.info("\(item.title)")
         }
     }
 }
@@ -90,6 +97,7 @@ struct WatchingListView: View {
                 Label("Settings", systemImage: "gear")
             }.tag(3)
         }
+        .environment(Auth())
         .modelContainer(container)
     } catch {
         fatalError("failed to create model container because of: \(error.localizedDescription)")

@@ -18,4 +18,5 @@ struct AuthenticatedView: View {
 
 #Preview {
     AuthenticatedView()
+        .environment(Auth())
 }

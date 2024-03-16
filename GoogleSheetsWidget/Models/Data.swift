@@ -13,6 +13,10 @@ class Watcher {
     var column: String
     var row: Int
 
+    var isEmpty: Bool {
+        return title.isEmpty || spreadsheetName == nil || spreadsheetName == "" || sheetName == nil || sheetName == ""
+    }
+    
     init(title: String, spreadsheetId: String, spreadsheetName: String, sheetName: String, column: String, row: Int) {
         self.title = title
         self.spreadsheetId = spreadsheetId

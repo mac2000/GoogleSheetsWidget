@@ -18,4 +18,5 @@ struct AnonymousView: View {
 
 #Preview {
     AnonymousView()
+        .environment(Auth())
 }

@@ -1,9 +1,11 @@
 import SwiftUI
 import CryptoKit
 import SafariServices
+import OSLog
 
 @Observable
 class Auth {
+    private let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Auth")
     private let clientId = "165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58.apps.googleusercontent.com"
     private let redirectUri = "com.googleusercontent.apps.165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58:/callback"
     private var refreshToken: String?
@@ -11,11 +13,11 @@ class Auth {
     
     init() {
         if let refreshToken = RefreshTokenStorage.get() {
-            print("auth init - authenticated, refresh_token=" + refreshToken.prefix(6))
+            log.info("authenticated")
             self.refreshToken = refreshToken
             self.isAuthenticated = true
         } else {
-            print("auth init - anonymous")
+            log.info("anonymous")
             self.refreshToken = nil
             self.isAuthenticated = false
         }
@@ -47,16 +49,15 @@ class Auth {
     }
     
     func logout() {
-        print("logout")
+        log.info("logout")
         RefreshTokenStorage.delete()
         self.refreshToken = nil
         self.isAuthenticated = false
     }
     
     func refresh() async throws -> String? {
-        // print("going to refresh refresh_token=" + refreshToken.prefix(4))
         guard let refreshToken = self.refreshToken else {
-            print("can not refresh - refresh token is nil")
+            log.warning("can not refresh - refresh token is nil")
             return nil
         }
         var parameters = URLComponents()
@@ -74,17 +75,17 @@ class Auth {
         let (data, _) = try await URLSession.shared.data(for: request)
         
         guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            print("invalid json, calling logout")
+            log.warning("invalid json, calling logout")
             logout()
             return nil
         }
         
         if let accessToken = json["access_token"] as? String {
-            print("refreshed access_token=" + accessToken.prefix(4))
+            log.warning("refreshed access_token=\(accessToken.prefix(4))")
             return accessToken
         } else {
-            print("refresh failed, calling logout")
-            print(json)
+            log.warning("refresh failed, calling logout")
+            log.debug("\(json)")
             logout()
             return nil
         }
@@ -113,20 +114,20 @@ class Auth {
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                    print("invalid json, calling logout")
+                    self.log.warning("invalid json, calling logout")
                     self.logout()
                     return
                 }
                 
-                // print(json)
+                // self.log.debug("\(json)")
 
                 guard let refreshToken = json["refresh_token"] as? String else {
-                    print("tokens missing, calling logout")
+                    self.log.warning("tokens missing, calling logout")
                     self.logout()
                     return
                 }
                 
-                print("authenticated, refresh_token=" + refreshToken.prefix(6))
+                self.log.info("authenticated, refresh_token=\(refreshToken.prefix(6))")
                 RefreshTokenStorage.set(refreshToken)
                 self.refreshToken = refreshToken
                 self.isAuthenticated = true
@@ -146,6 +147,7 @@ struct SafariWebView: UIViewControllerRepresentable {
 }
 
 struct RefreshTokenStorage {
+    static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "RefreshTokenStorage")
     static let service = "GoogleSheetsWidget"
     static let account = "refresh_token"
     static let group = "group.GoogleSheetsWidget"
@@ -165,7 +167,7 @@ struct RefreshTokenStorage {
               let data = result as? Data,
               let token = String(data: data, encoding: .utf8) else {
             let message = String(SecCopyErrorMessageString(status, nil) ?? "unknown" as CFString)
-            print("token not retrieved because: \(message)")
+            log.warning("token not retrieved because: \(message)")
             return nil
         }
         
@@ -174,12 +176,12 @@ struct RefreshTokenStorage {
     
     static func set(_ value: String?) {
         guard let value = value else {
-            print("token will be deleted - nil value passed")
+            log.warning("token will be deleted - nil value passed")
             delete()
             return
         }
         guard let data = value.data(using: .utf8) else {
-            print("token not saved because: empty value given")
+            log.warning("token not saved because: empty value given")
             return
         }
         
@@ -196,10 +198,10 @@ struct RefreshTokenStorage {
         let status = SecItemAdd(query, nil)
         
         if status == errSecSuccess {
-            print("token saved")
+            log.info("token saved")
         } else {
             let message = String(SecCopyErrorMessageString(status, nil) ?? "unknown" as CFString)
-            print("token not saved because: \(message)")
+            log.warning("token not saved because: \(message)")
         }
     }
     
@@ -212,10 +214,10 @@ struct RefreshTokenStorage {
         ] as CFDictionary)
         
         if status == errSecSuccess {
-            print("token deleted")
+            log.info("token deleted")
         } else {
             let message = String(SecCopyErrorMessageString(status, nil) ?? "unknown" as CFString)
-            print("token not deleted because: \(message)")
+            log.warning("token not deleted because: \(message)")
         }
     }
 }

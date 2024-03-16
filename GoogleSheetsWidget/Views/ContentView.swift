@@ -1,8 +1,10 @@
 import SwiftUI
+import OSLog
 
 struct ContentView: View {
+    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "ContentView")
     @Environment(Auth.self) var auth
-    //@AppStorage("refresh_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var refreshToken: String?
+    
     var body: some View {
         Group {
             if auth.isAuthenticated {
@@ -12,11 +14,12 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            print("isAuthenticated: " + (auth.isAuthenticated ? "Y" : "N"))
+            log.info("isAuthenticated: \(auth.isAuthenticated ? "Y" : "N")")
         }
     }
 }
 
 #Preview {
     ContentView()
+        .environment(Auth())
 }
