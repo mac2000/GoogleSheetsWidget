@@ -1,7 +1,7 @@
 import SwiftUI
 import OSLog
 
-struct InfoView: View {
+struct SettingsTab: View {
     let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "InfoView")
     @Environment(Auth.self) var auth
     @State private var message = "Authenticated"
@@ -81,13 +81,13 @@ struct InfoView: View {
 
 #Preview {
     TabView(selection: .constant(3)) {
-        WatchingListView().tabItem {
+        DataTab().tabItem {
             Label("Data", systemImage: "doc.text")
         }.tag(1)
-        WidgetsView().tabItem {
+        WidgetsTab().tabItem {
             Label("Widgets", systemImage: "square.grid.3x2")
         }.tag(2)
-        InfoView().tabItem {
+        SettingsTab().tabItem {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }

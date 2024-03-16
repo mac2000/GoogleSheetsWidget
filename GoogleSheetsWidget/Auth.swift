@@ -134,6 +134,17 @@ class Auth {
             }
         }.resume()
     }
+    
+    func with(completion: @escaping (String?) -> Void) {
+        Task {
+            guard let accessToken = try await refresh() else {
+                log.warning("unable to refresh token")
+                self.logout()
+                return
+            }
+            completion(accessToken)
+        }
+    }
 }
 
 struct SafariWebView: UIViewControllerRepresentable {

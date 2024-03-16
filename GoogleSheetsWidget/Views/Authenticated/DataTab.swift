@@ -2,8 +2,9 @@ import SwiftUI
 import SwiftData
 import OSLog
 
-struct WatchingListView: View {
+struct DataTab: View {
     let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "WatchingListView")
+    @Environment(Auth.self) var auth
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Watcher.title) var items: [Watcher]
     @State private var path = NavigationPath()
@@ -41,7 +42,7 @@ struct WatchingListView: View {
                 }
             }
             .refreshable {
-                refresh()
+                await self.refresh()
             }
             .navigationTitle("Data")
             .navigationDestination(for: Watcher.self) { item in
@@ -70,9 +71,25 @@ struct WatchingListView: View {
         }
     }
     
-    func refresh() {
-        for item in items {
-            log.info("\(item.title)")
+    func refresh() async {
+        do {
+            guard let token = try await auth.refresh() else { return }
+            for item in items {
+                guard let spreadsheetId = item.spreadsheetId,
+                   let sheetName = item.sheetName else {
+                    log.info("skipping \(item.title)")
+                    continue
+                }
+                log.info("\(item.title)")
+                let value = try await GoogleSpreadsheets.getValue(accessToken: token, spreadsheetId: spreadsheetId, sheetName: sheetName, column: item.column, row: item.row)
+                
+                log.info("\(value)")
+                // item.value = value
+                item.setValue(value: value)
+            }
+            //try modelContext.save()
+        } catch {
+            log.warning("can not refresh: \(error.localizedDescription)")
         }
     }
 }
@@ -87,13 +104,13 @@ struct WatchingListView: View {
         container.mainContext.insert(Watcher.example3)
         
         return TabView(selection: .constant(1)) {
-            WatchingListView().tabItem {
+            DataTab().tabItem {
                 Label("Data", systemImage: "doc.text")
             }.tag(1)
-            WidgetsView().tabItem {
+            WidgetsTab().tabItem {
                 Label("Widgets", systemImage: "square.grid.3x2")
             }.tag(2)
-            InfoView().tabItem {
+            SettingsTab().tabItem {
                 Label("Settings", systemImage: "gear")
             }.tag(3)
         }

@@ -3,13 +3,13 @@ import SwiftUI
 struct AuthenticatedView: View {
     var body: some View {
         TabView{
-            WatchingListView().tabItem {
+            DataTab().tabItem {
                 Label("Data", systemImage: "doc.text")
             }
-            WidgetsView().tabItem {
+            WidgetsTab().tabItem {
                 Label("Widgets", systemImage: "square.grid.3x2")
             }
-            InfoView().tabItem {
+            SettingsTab().tabItem {
                 Label("Settings", systemImage: "gear")
             }
         }

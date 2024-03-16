@@ -8,40 +8,45 @@ struct SpreadsheetPicker: View {
     
     var body: some View {
         List {
-            Text("Hello, World!")
-            Text(auth.isAuthenticated ? "Y" : "N")
+            if auth.isAuthenticated {
+                Text("Authenticated").foregroundStyle(.green)
+            } else {
+                Text("Anonymous").foregroundStyle(.red)
+            }
+            ForEach(spreadsheets) { spreadsheet in
+                Text(spreadsheet.name)
+            }
         }
         .navigationTitle("Spreadsheet")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: load)
+        .task {
+            do {
+                try await load()
+            } catch {
+                log.error("failed retrieve spreadsheets because of \(error.localizedDescription)")
+            }
+        }
     }
     
-    func load() {
-//        guard let accessToken = accessToken else { return }
-//        guard var url = URL(string: "https://www.googleapis.com/drive/v3/files") else { return }
-//        
-//        url.append(queryItems: [URLQueryItem(name:"q",value:"mimeType='application/vnd.google-apps.spreadsheet'")])
-//        
-//        var request = URLRequest(url: url)
-//        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-//        
-//        URLSession.shared.dataTask(with: request) { (data, response, error) in
-//            guard let data = data, let result = try? JSONDecoder().decode(SpreadsheetsListResponse.self, from: data) else {
-//                log.info(error ?? "invalid json")
-//                return
-//            }
-//            self.spreadsheets = result.files
-//        }.resume()
+    func load() async throws {
+        guard let token = try await auth.refresh() else { return }
+        
+        guard var url = URL(string: "https://www.googleapis.com/drive/v3/files") else { return }
+        
+        url.append(queryItems: [URLQueryItem(name:"q",value:"mimeType='application/vnd.google-apps.spreadsheet'")])
+        
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        guard let result = try? JSONDecoder().decode(SpreadsheetsListResponse.self, from: data) else {
+            log.info("invalid json")
+            return
+        }
+        
+        self.spreadsheets = result.files
     }
-}
-
-fileprivate struct SpreadsheetsListResponse: Codable {
-    let files: [Spreadsheet]
-}
-
-struct Spreadsheet: Codable, Identifiable, Hashable {
-    let id: String
-    let name: String
 }
 
 #Preview {

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct WidgetsView: View {
+struct WidgetsTab: View {
     var body: some View {
         NavigationStack {
             Form {
@@ -15,13 +15,13 @@ struct WidgetsView: View {
 
 #Preview {
     TabView(selection: .constant(2)) {
-        WatchingListView().tabItem {
+        DataTab().tabItem {
             Label("Data", systemImage: "doc.text")
         }.tag(1)
-        WidgetsView().tabItem {
+        WidgetsTab().tabItem {
             Label("Widgets", systemImage: "square.grid.3x2")
         }.tag(2)
-        InfoView().tabItem {
+        SettingsTab().tabItem {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }

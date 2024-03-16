@@ -1,10 +1,16 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 struct WatcherFormView: View {
+    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "WatcherFormView")
+    @Environment(Auth.self) var auth
     @Bindable var item: Watcher
     
-    var spreadsheets: [String] = ["Demo1", "Demo2", "Demo3"]
+    @State var selectedSpreadsheet: Spreadsheet?
+    @State var spreadsheets: [Spreadsheet] = []
+    @State var sheets: [String] = []
+    let columns: [String] = (Unicode.Scalar("A").value...Unicode.Scalar("Z").value).map{"\(UnicodeScalar($0)!)"}
     
     var body: some View {
         Form {
@@ -13,14 +19,76 @@ struct WatcherFormView: View {
             }
             
             Section("Spreadsheet") {
-                Picker("Spreadsheet", selection: $item.spreadsheetId) {
-                    Text("Demo1")
+                Picker("Spreadsheet", selection: $selectedSpreadsheet) {
+                    Text("Unknown").tag(Optional<Spreadsheet>.none)
+                    ForEach(spreadsheets) { spreadsheet in
+                        Text(spreadsheet.name).tag(Optional(spreadsheet))
+                    }
+                }.onChange(of: selectedSpreadsheet) {
+                    if selectedSpreadsheet != nil {
+                        item.spreadsheetId = selectedSpreadsheet!.id
+                        item.spreadsheetName = selectedSpreadsheet!.name
+                        Task {
+                            self.sheets = try await self.loadSheets()
+                        }
+                    }
+                }
+                
+                if selectedSpreadsheet != nil {
+                    Picker("Sheet", selection: $item.sheetName) {
+                        Text("Unknown").tag(Optional<String>.none)
+                        ForEach(sheets, id: \.self) { sheet in
+                            Text(sheet).tag(Optional(sheet))
+                        }
+                    }
+                }
+                
+                Picker("Column", selection: $item.column) {
+                    Text("Unknown").tag(Optional<String>.none)
+                    ForEach(columns, id: \.self) { column in
+                            Text(column)
+                    }
+                }
+                
+                Picker("Row", selection: $item.row) {
+                    ForEach(1...30, id: \.self) { row in
+                            Text("\(row)")
+                    }
                 }
             }
         }
         .navigationTitle("Track")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            do {
+                self.spreadsheets = try await load()
+                let found = self.spreadsheets.first { spreadsheet in
+                    spreadsheet.id == item.spreadsheetId
+                }
+                if found != nil {
+                    self.selectedSpreadsheet = found
+                } else {
+                    self.selectedSpreadsheet = self.spreadsheets[0]
+                }
+                self.sheets = try await loadSheets()
+            } catch {
+                log.error("failed retrieve spreadsheets because of \(error.localizedDescription)")
+            }
+        }
         
+    }
+    
+    func load() async throws -> [Spreadsheet] {
+        guard let token = try await auth.refresh() else { return [] }
+        return try await GoogleSpreadsheets.getSpreadsheets(accessToken: token)
+    }
+    
+    func loadSheets() async throws -> [String] {
+        if item.spreadsheetId != nil {
+            guard let token = try await auth.refresh() else { return [] }
+            return try await GoogleSpreadsheets.getSheets(accessToken: token, spreadsheetId: item.spreadsheetId!)
+        }
+        return []
     }
 }
 
@@ -39,10 +107,10 @@ struct WatcherFormView: View {
             }.tabItem {
                 Label("Data", systemImage: "doc.text")
             }.tag(1)
-            WidgetsView().tabItem {
+            WidgetsTab().tabItem {
                 Label("Widgets", systemImage: "square.grid.3x2")
             }.tag(2)
-            InfoView().tabItem {
+            SettingsTab().tabItem {
                 Label("Settings", systemImage: "gear")
             }.tag(3)
         }
