@@ -80,6 +80,7 @@
 		04E41D452BA5BF990095C411 /* SpreadsheetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetPicker.swift; sourceTree = "<group>"; };
 		04E41D472BA5C3360095C411 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		04E41D672BA60FDF0095C411 /* Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
+		04E41D692BA6D1EA0095C411 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 		04490B112BA465DD009E5034 = {
 			isa = PBXGroup;
 			children = (
+				04E41D692BA6D1EA0095C411 /* README.md */,
 				04490B542BA46AB5009E5034 /* GoogleSheetsWidget */,
 				04E41C6C2BA473460095C411 /* Widgets */,
 				04E41C672BA473460095C411 /* Frameworks */,
