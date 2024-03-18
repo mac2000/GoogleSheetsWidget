@@ -1,6 +1,6 @@
 import Foundation
 
-extension URLRequest {
+public extension URLRequest {
     init(url: URL, accessToken: String) {
         self.init(url: url)
         self.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")

@@ -1,6 +1,6 @@
 import Foundation
 
-extension URL {
+public extension URL {
     init?(url: String, query: [String: String]) {
         guard var components = URLComponents(string: url) else { return nil }
         components.queryItems = query.map { URLQueryItem(name: $0.key, value: $0.value) }
@@ -37,3 +37,4 @@ extension URL {
         return components?.url
     }
 }
+

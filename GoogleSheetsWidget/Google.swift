@@ -1,5 +1,6 @@
 import SwiftUI
 import OSLog
+import Shared
 
 class GoogleSpreadsheets {
     private static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "GoogleSpreadsheets")

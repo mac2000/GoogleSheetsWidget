@@ -1,6 +1,6 @@
 import Foundation
 
-extension URLSession {
+public extension URLSession {
     func decoded<D>(_ url: URL) async throws -> D where D: Decodable {
         let request = URLRequest(url: url)
         return try await self.decoded(request)
