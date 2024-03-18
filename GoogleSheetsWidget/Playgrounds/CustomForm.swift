@@ -3,7 +3,7 @@ import SwiftUI
 struct CustomForm: View {
     @State private var number = 1
     @State private var numbers = [1,2,3]
-    @State private var item: CustomPickerItem?
+    @State private var item: Spreadsheet?
     
     var body: some View {
         Form {
@@ -18,17 +18,14 @@ struct CustomForm: View {
             
             Section("Custom") {
                 NavigationLink {
-                    CustomPicker(item: $item)
-                    .onSubmit {
-                        print("Submitted?")
-                    }
+                    PreviewApi(item: $item)
                 } label: {
                     HStack {
                         Text("Custom")
                         Spacer()
                         Text(item?.name ?? "N/A").foregroundStyle(.secondary)
                     }
-                }.isDetailLink(false)
+                }
             }
             
             

@@ -11,6 +11,12 @@
 		04490B582BA46AB5009E5034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B572BA46AB5009E5034 /* ContentView.swift */; };
 		04490B5A2BA46AB7009E5034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B592BA46AB7009E5034 /* Assets.xcassets */; };
 		04490B5D2BA46AB7009E5034 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B5C2BA46AB7009E5034 /* Preview Assets.xcassets */; };
+		048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */; };
+		048FB4D42BA78C410062EE05 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4D32BA78C410062EE05 /* URLRequest.swift */; };
+		048FB4D62BA78C980062EE05 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4D52BA78C980062EE05 /* URLSession.swift */; };
+		048FB4D92BA78CD00062EE05 /* DebouncedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4D82BA78CD00062EE05 /* DebouncedState.swift */; };
+		048FB4DB2BA78E880062EE05 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4DA2BA78E880062EE05 /* URL.swift */; };
+		048FB4DD2BA83AB90062EE05 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4DC2BA83AB90062EE05 /* Keychain.swift */; };
 		04E41C692BA473460095C411 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C682BA473460095C411 /* WidgetKit.framework */; };
 		04E41C6B2BA473460095C411 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C6A2BA473460095C411 /* SwiftUI.framework */; };
 		04E41C6E2BA473460095C411 /* WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C6D2BA473460095C411 /* WidgetsBundle.swift */; };
@@ -63,6 +69,12 @@
 		04490B572BA46AB5009E5034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		04490B592BA46AB7009E5034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04490B5C2BA46AB7009E5034 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableNavigationLink.swift; sourceTree = "<group>"; };
+		048FB4D32BA78C410062EE05 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		048FB4D52BA78C980062EE05 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		048FB4D82BA78CD00062EE05 /* DebouncedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncedState.swift; sourceTree = "<group>"; };
+		048FB4DA2BA78E880062EE05 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		048FB4DC2BA83AB90062EE05 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		04E41C662BA473460095C411 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E41C682BA473460095C411 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		04E41C6A2BA473460095C411 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -132,16 +144,18 @@
 		04490B542BA46AB5009E5034 /* GoogleSheetsWidget */ = {
 			isa = PBXGroup;
 			children = (
-				04E41D6A2BA6E2EB0095C411 /* Playgrounds */,
 				04490B552BA46AB5009E5034 /* Application.swift */,
 				04490B592BA46AB7009E5034 /* Assets.xcassets */,
+				04E41D472BA5C3360095C411 /* Auth.swift */,
 				04E41C7D2BA476850095C411 /* Entitlements.entitlements */,
+				048FB4D22BA78C2D0062EE05 /* Extensions */,
+				04E41D672BA60FDF0095C411 /* Google.swift */,
 				04E41C892BA48C750095C411 /* Info.plist */,
 				04E41D3E2BA5A0320095C411 /* Models */,
+				04E41D6A2BA6E2EB0095C411 /* Playgrounds */,
 				04490B5B2BA46AB7009E5034 /* Preview Content */,
+				048FB4D72BA78CC30062EE05 /* Utils */,
 				04E41C7F2BA47B7C0095C411 /* Views */,
-				04E41D472BA5C3360095C411 /* Auth.swift */,
-				04E41D672BA60FDF0095C411 /* Google.swift */,
 			);
 			path = GoogleSheetsWidget;
 			sourceTree = "<group>";
@@ -152,6 +166,25 @@
 				04490B5C2BA46AB7009E5034 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		048FB4D22BA78C2D0062EE05 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				048FB4D32BA78C410062EE05 /* URLRequest.swift */,
+				048FB4D52BA78C980062EE05 /* URLSession.swift */,
+				048FB4DA2BA78E880062EE05 /* URL.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		048FB4D72BA78CC30062EE05 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				048FB4D82BA78CD00062EE05 /* DebouncedState.swift */,
+				048FB4DC2BA83AB90062EE05 /* Keychain.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		04E41C672BA473460095C411 /* Frameworks */ = {
@@ -212,6 +245,7 @@
 				04E41D6D2BA6F3D60095C411 /* SpreadsheetNavigationPicker.swift */,
 				04E41D6F2BA6FF970095C411 /* PreviewApi.swift */,
 				04E41D712BA7236C0095C411 /* CustomForm.swift */,
+				048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -325,13 +359,19 @@
 				04E41D702BA6FF970095C411 /* PreviewApi.swift in Sources */,
 				04E41D682BA60FDF0095C411 /* Google.swift in Sources */,
 				04E41C8C2BA49B2D0095C411 /* SettingsTab.swift in Sources */,
+				048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */,
 				04E41D402BA5A05E0095C411 /* Data.swift in Sources */,
 				04E41C8E2BA4A6340095C411 /* DataTab.swift in Sources */,
 				04E41D432BA5B6BE0095C411 /* WatcherFormView.swift in Sources */,
 				04E41D482BA5C3360095C411 /* Auth.swift in Sources */,
 				04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */,
+				048FB4D62BA78C980062EE05 /* URLSession.swift in Sources */,
+				048FB4DB2BA78E880062EE05 /* URL.swift in Sources */,
 				04490B562BA46AB5009E5034 /* Application.swift in Sources */,
+				048FB4D42BA78C410062EE05 /* URLRequest.swift in Sources */,
 				04E41D722BA7236C0095C411 /* CustomForm.swift in Sources */,
+				048FB4D92BA78CD00062EE05 /* DebouncedState.swift in Sources */,
+				048FB4DD2BA83AB90062EE05 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

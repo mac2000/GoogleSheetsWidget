@@ -18,7 +18,7 @@ struct SpreadsheetNavigationPicker: View {
             
             Section("Custom") {
                 NavigationLink {
-                    PreviewApi()
+                    PreviewApi(item: $item)
                     .onSubmit {
                         print("Submitted")
                     }
@@ -30,8 +30,6 @@ struct SpreadsheetNavigationPicker: View {
                     }
                 }
             }
-            
-            
         }
         .navigationTitle("Pickers")
     }

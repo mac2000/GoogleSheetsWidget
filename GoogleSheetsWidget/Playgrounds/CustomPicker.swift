@@ -26,21 +26,21 @@ struct CustomPicker: View {
         .navigationTitle("Custom picker")
         .navigationBarTitleDisplayMode(.inline)
         .task { await load() }
-        .refreshable { await load() }
+        // .refreshable { await load() }
         .searchable(text: $search.currentValue)
         .onChange(of: search.debouncedValue, { oldValue, newValue in
             Task { await load() }
         })
-        .onChange(of: item, { oldValue, newValue in
-            guard let name = newValue?.name else { return }
+        .onChange(of: item, { _, _ in
+            //guard let name = newValue?.name else { return }
+            //print("Selected \(name)")
             dismiss()
-            print("Selected \(name)")
         })
     }
     
     func load() async {
         loading = true
-        item = nil
+        // item = nil
         // pretend we are retrieving list from backend
         let sleepSeconds = 2
         try? await Task.sleep(nanoseconds: UInt64(sleepSeconds) * NSEC_PER_SEC)
@@ -58,26 +58,13 @@ struct CustomPicker: View {
     }
 }
 
-private class DebouncedState<Value>: ObservableObject {
-    @Published var currentValue: Value
-    @Published var debouncedValue: Value
-    
-    init(initialValue: Value, delay: Double = 0.3) {
-        _currentValue = Published(initialValue: initialValue)
-        _debouncedValue = Published(initialValue: initialValue)
-        $currentValue
-            .debounce(for: .seconds(delay), scheduler: RunLoop.main)
-            .assign(to: &$debouncedValue)
-    }
-}
-
 struct CustomPickerItem: Codable, Identifiable, Hashable {
     let id: String
     let name: String
 }
 
-//#Preview {
-//    NavigationStack {
-//        CustomPicker()
-//    }
-//}
+#Preview {
+    NavigationStack {
+        CustomPicker(item: .constant(nil))
+    }
+}

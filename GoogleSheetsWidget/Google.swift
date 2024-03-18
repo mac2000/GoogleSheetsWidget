@@ -5,6 +5,13 @@ class GoogleSpreadsheets {
     private static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "GoogleSpreadsheets")
     
     public static func getSpreadsheets(accessToken: String) async throws -> [Spreadsheet] {
+        guard let url = URL(url: "https://www.googleapis.com/drive/v3/files", query: ["q" : "mimeType='application/vnd.google-apps.spreadsheet'"]) else { return [] }
+        let request = URLRequest(url: url, accessToken: accessToken)
+        guard let result: SpreadsheetsListResponse = try? await URLSession.shared.decoded(request) else { return [] }
+        return result.files
+        
+        // ---
+        /*
         guard var url = URL(string: "https://www.googleapis.com/drive/v3/files") else { return [] }
         
         url.append(queryItems: [URLQueryItem(name:"q",value:"mimeType='application/vnd.google-apps.spreadsheet'")])
@@ -20,6 +27,7 @@ class GoogleSpreadsheets {
         }
         
         return result.files
+        */
     }
     
     public static func getSheets(accessToken: String, spreadsheetId: String) async throws -> [String] {
