@@ -109,3 +109,11 @@ Hello   1
 World   2
 ```
 
+## Notes
+
+Xcode caches cleanup
+
+```bash
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
+rm -rf ~/Library/Caches/com.apple.dt.Xcode
+```

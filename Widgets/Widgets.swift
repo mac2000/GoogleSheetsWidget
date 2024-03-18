@@ -1,5 +1,6 @@
 import WidgetKit
 import SwiftUI
+import Shared
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
@@ -8,6 +9,7 @@ struct SimpleEntry: TimelineEntry {
 
 struct Provider: TimelineProvider {
     let auth = Auth()
+    let u = URL(string: "")?.withFoo("a", "b")
     
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), value: "N/A")

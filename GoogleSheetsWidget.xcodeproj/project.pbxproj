@@ -11,6 +11,11 @@
 		04490B582BA46AB5009E5034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B572BA46AB5009E5034 /* ContentView.swift */; };
 		04490B5A2BA46AB7009E5034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B592BA46AB7009E5034 /* Assets.xcassets */; };
 		04490B5D2BA46AB7009E5034 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B5C2BA46AB7009E5034 /* Preview Assets.xcassets */; };
+		048DD0EC2BA8DAD60064F663 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A379922BA8CBAA00A7152D /* Keychain.swift */; };
+		048DD1292BA8E21C0064F663 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1282BA8E21C0064F663 /* Shared.swift */; };
+		048DD12E2BA8E22A0064F663 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD12D2BA8E22A0064F663 /* URL.swift */; };
+		048DD12F2BA8E2600064F663 /* libShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DD1262BA8E21C0064F663 /* libShared.a */; };
+		048DD1322BA8E2680064F663 /* libShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DD1262BA8E21C0064F663 /* libShared.a */; };
 		048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */; };
 		048FB4D42BA78C410062EE05 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4D32BA78C410062EE05 /* URLRequest.swift */; };
 		048FB4D62BA78C980062EE05 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4D52BA78C980062EE05 /* URLSession.swift */; };
@@ -40,6 +45,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		048DD1302BA8E2600064F663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04490B122BA465DD009E5034 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 048DD1252BA8E21C0064F663;
+			remoteInfo = Shared;
+		};
+		048DD1332BA8E2680064F663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04490B122BA465DD009E5034 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 048DD1252BA8E21C0064F663;
+			remoteInfo = Shared;
+		};
 		04E41C742BA473470095C411 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 04490B122BA465DD009E5034 /* Project object */;
@@ -50,6 +69,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		048DD1242BA8E21C0064F663 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04E41C772BA473470095C411 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,6 +97,9 @@
 		04490B572BA46AB5009E5034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		04490B592BA46AB7009E5034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04490B5C2BA46AB7009E5034 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		048DD1262BA8E21C0064F663 /* libShared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libShared.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		048DD1282BA8E21C0064F663 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		048DD12D2BA8E22A0064F663 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableNavigationLink.swift; sourceTree = "<group>"; };
 		048FB4D32BA78C410062EE05 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		048FB4D52BA78C980062EE05 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
@@ -106,6 +137,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048DD12F2BA8E2600064F663 /* libShared.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048DD1232BA8E21C0064F663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +154,7 @@
 			files = (
 				04E41C6B2BA473460095C411 /* SwiftUI.framework in Frameworks */,
 				04E41C692BA473460095C411 /* WidgetKit.framework in Frameworks */,
+				048DD1322BA8E2680064F663 /* libShared.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +167,7 @@
 				04E41D692BA6D1EA0095C411 /* README.md */,
 				04490B542BA46AB5009E5034 /* GoogleSheetsWidget */,
 				04E41C6C2BA473460095C411 /* Widgets */,
+				048DD1272BA8E21C0064F663 /* Shared */,
 				04E41C672BA473460095C411 /* Frameworks */,
 				04490B1B2BA465DD009E5034 /* Products */,
 			);
@@ -137,6 +178,7 @@
 			children = (
 				04490B532BA46AB5009E5034 /* GoogleSheetsWidget.app */,
 				04E41C662BA473460095C411 /* WidgetsExtension.appex */,
+				048DD1262BA8E21C0064F663 /* libShared.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,7 +190,6 @@
 				04490B592BA46AB7009E5034 /* Assets.xcassets */,
 				04E41D472BA5C3360095C411 /* Auth.swift */,
 				04A379922BA8CBAA00A7152D /* Keychain.swift */,
-				04E41C6F2BA473460095C411 /* Widgets.swift */,
 				04E41C7D2BA476850095C411 /* Entitlements.entitlements */,
 				048FB4D22BA78C2D0062EE05 /* Extensions */,
 				04E41D672BA60FDF0095C411 /* Google.swift */,
@@ -168,6 +209,15 @@
 				04490B5C2BA46AB7009E5034 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		048DD1272BA8E21C0064F663 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				048DD1282BA8E21C0064F663 /* Shared.swift */,
+				048DD12D2BA8E22A0064F663 /* URL.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		048FB4D22BA78C2D0062EE05 /* Extensions */ = {
@@ -201,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				04E41C7E2BA476B20095C411 /* Entitlements.entitlements */,
+				04E41C6F2BA473460095C411 /* Widgets.swift */,
 				04E41C6D2BA473460095C411 /* WidgetsBundle.swift */,
 				04E41C712BA473470095C411 /* Assets.xcassets */,
 				04E41C732BA473470095C411 /* Info.plist */,
@@ -266,11 +317,29 @@
 			);
 			dependencies = (
 				04E41C752BA473470095C411 /* PBXTargetDependency */,
+				048DD1312BA8E2600064F663 /* PBXTargetDependency */,
 			);
 			name = GoogleSheetsWidget;
 			productName = GoogleSheetsWidget;
 			productReference = 04490B532BA46AB5009E5034 /* GoogleSheetsWidget.app */;
 			productType = "com.apple.product-type.application";
+		};
+		048DD1252BA8E21C0064F663 /* Shared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048DD12A2BA8E21C0064F663 /* Build configuration list for PBXNativeTarget "Shared" */;
+			buildPhases = (
+				048DD1222BA8E21C0064F663 /* Sources */,
+				048DD1232BA8E21C0064F663 /* Frameworks */,
+				048DD1242BA8E21C0064F663 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Shared;
+			productName = Shared;
+			productReference = 048DD1262BA8E21C0064F663 /* libShared.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		04E41C652BA473460095C411 /* WidgetsExtension */ = {
 			isa = PBXNativeTarget;
@@ -283,6 +352,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				048DD1342BA8E2680064F663 /* PBXTargetDependency */,
 			);
 			name = WidgetsExtension;
 			productName = WidgetsExtension;
@@ -300,6 +370,9 @@
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					04490B522BA46AB5009E5034 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					048DD1252BA8E21C0064F663 = {
 						CreatedOnToolsVersion = 15.3;
 					};
 					04E41C652BA473460095C411 = {
@@ -322,6 +395,7 @@
 			targets = (
 				04490B522BA46AB5009E5034 /* GoogleSheetsWidget */,
 				04E41C652BA473460095C411 /* WidgetsExtension */,
+				048DD1252BA8E21C0064F663 /* Shared */,
 			);
 		};
 /* End PBXProject section */
@@ -375,11 +449,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		048DD1222BA8E21C0064F663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048DD1292BA8E21C0064F663 /* Shared.swift in Sources */,
+				048DD12E2BA8E22A0064F663 /* URL.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		04E41C622BA473460095C411 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				04E41C6E2BA473460095C411 /* WidgetsBundle.swift in Sources */,
+				048DD0EC2BA8DAD60064F663 /* Keychain.swift in Sources */,
 				04E41C702BA473460095C411 /* Widgets.swift in Sources */,
 				04E41D662BA5F3540095C411 /* Auth.swift in Sources */,
 			);
@@ -388,6 +472,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		048DD1312BA8E2600064F663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 048DD1252BA8E21C0064F663 /* Shared */;
+			targetProxy = 048DD1302BA8E2600064F663 /* PBXContainerItemProxy */;
+		};
+		048DD1342BA8E2680064F663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 048DD1252BA8E21C0064F663 /* Shared */;
+			targetProxy = 048DD1332BA8E2680064F663 /* PBXContainerItemProxy */;
+		};
 		04E41C752BA473470095C411 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 04E41C652BA473460095C411 /* WidgetsExtension */;
@@ -455,6 +549,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -591,6 +686,32 @@
 			};
 			name = Release;
 		};
+		048DD12B2BA8E21C0064F663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7ZQRKLMXS;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		048DD12C2BA8E21C0064F663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J7ZQRKLMXS;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		04E41C782BA473470095C411 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -672,6 +793,15 @@
 			buildConfigurations = (
 				04490B5F2BA46AB7009E5034 /* Debug */,
 				04490B602BA46AB7009E5034 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048DD12A2BA8E21C0064F663 /* Build configuration list for PBXNativeTarget "Shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048DD12B2BA8E21C0064F663 /* Debug */,
+				048DD12C2BA8E21C0064F663 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

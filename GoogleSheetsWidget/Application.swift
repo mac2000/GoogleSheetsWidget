@@ -1,10 +1,10 @@
 import SwiftUI
-
-import SwiftUI
 import SwiftData
+import Shared
 
 @main
 struct Application: App {
+    let u = URL(string: "")?.withFoo("a", "b")
     let auth = Auth()
     var body: some Scene {
         WindowGroup {
