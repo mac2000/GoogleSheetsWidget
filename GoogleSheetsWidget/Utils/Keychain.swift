@@ -5,7 +5,7 @@ struct Keychain {
     static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Keychain")
     static let service = Bundle.main.bundleIdentifier!
     static let group = "group.GoogleSheetsWidget" // FIXME: MUST be synced with actual app group manually
-    
+
     static func get(_ key: String) -> String? {
         var result: CFTypeRef?
         let status = SecItemCopyMatching([
@@ -27,7 +27,7 @@ struct Keychain {
         
         return value
     }
-    
+
     static func set(_ key: String, _ value: String?) {
         guard let value = value else {
             log.warning("removing '\(key)' from keychain because: nil value were passed")
@@ -38,7 +38,7 @@ struct Keychain {
             log.warning("can not set new value to '\(key)' because: empty value given")
             return
         }
-        
+
         let query = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
@@ -58,7 +58,7 @@ struct Keychain {
             log.warning("can not set new value for '\(key)' because: '\(message)'")
         }
     }
-    
+
     static func delete(_ key: String) {
         let status = SecItemDelete([
             kSecClass: kSecClassGenericPassword,
