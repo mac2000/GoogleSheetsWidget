@@ -6,7 +6,7 @@ import Shared
 
 @Observable
 class Auth {
-    private let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Auth")
+    private let log = Logger("Auth")
     private let clientId = "165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58.apps.googleusercontent.com"
     private let redirectUri = "com.googleusercontent.apps.165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58:/callback"
     private var refreshToken: String?
@@ -160,7 +160,7 @@ struct SafariWebView: UIViewControllerRepresentable {
 }
 
 struct RefreshTokenStorage {
-//    static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "RefreshTokenStorage")
+//    static let log = Logger("RefreshTokenStorage")
     
     static func get() -> String? {
         return Keychain.get("refresh_token")

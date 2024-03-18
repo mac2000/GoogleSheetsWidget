@@ -3,7 +3,7 @@ import OSLog
 import Shared
 
 class GoogleSpreadsheets {
-    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "GoogleSpreadsheets")
+    private static let log = Logger("GoogleSpreadsheets")
     
     public static func getSpreadsheets(accessToken: String) async throws -> [Spreadsheet] {
         guard let url = URL(url: "https://www.googleapis.com/drive/v3/files", query: ["q" : "mimeType='application/vnd.google-apps.spreadsheet'"]) else { return [] }

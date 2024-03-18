@@ -3,7 +3,7 @@ import SwiftData
 import OSLog
 
 struct DataTab: View {
-    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "WatchingListView")
+    let log = Logger("WatchingListView")
     @Environment(Auth.self) var auth
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Watcher.title) var items: [Watcher]

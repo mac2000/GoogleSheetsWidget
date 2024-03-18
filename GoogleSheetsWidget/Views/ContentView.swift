@@ -2,7 +2,7 @@ import SwiftUI
 import OSLog
 
 struct ContentView: View {
-    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "ContentView")
+    let log = Logger("ContentView")
     @Environment(Auth.self) var auth
     
     var body: some View {

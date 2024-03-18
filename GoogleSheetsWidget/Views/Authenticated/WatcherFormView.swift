@@ -3,7 +3,7 @@ import SwiftData
 import OSLog
 
 struct WatcherFormView: View {
-    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "WatcherFormView")
+    let log = Logger("WatcherFormView")
     @Environment(Auth.self) var auth
     @Bindable var item: Watcher
     

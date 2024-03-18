@@ -2,7 +2,7 @@ import SwiftUI
 import OSLog
 
 struct SettingsTab: View {
-    let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "InfoView")
+    let log = Logger("InfoView")
     @Environment(Auth.self) var auth
     @State private var message = "Authenticated"
     @AppStorage("access_token",store: UserDefaults.init(suiteName: "group.GoogleSheetsWidget")) var accessToken: String?

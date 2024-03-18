@@ -2,7 +2,7 @@ import Foundation
 import OSLog
 
 public class Keychain {
-    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Keychain")
+    private static let log = Logger("Keychain")
     private static let service = Bundle.main.bundleIdentifier!
     private static let group = "group.GoogleSheetsWidget" // FIXME: MUST be synced with actual app group manually
 
