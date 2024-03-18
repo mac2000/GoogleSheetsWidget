@@ -17,8 +17,8 @@
 		048DD1322BA8E2680064F663 /* libShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DD1262BA8E21C0064F663 /* libShared.a */; };
 		048DD1372BA8E3300064F663 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1362BA8E3300064F663 /* URLSession.swift */; };
 		048DD1392BA8E34C0064F663 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1382BA8E34C0064F663 /* URLRequest.swift */; };
+		048DD13C2BA8E38F0064F663 /* DebouncedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD13B2BA8E38F0064F663 /* DebouncedState.swift */; };
 		048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */; };
-		048FB4D92BA78CD00062EE05 /* DebouncedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4D82BA78CD00062EE05 /* DebouncedState.swift */; };
 		04A379932BA8CBAA00A7152D /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A379922BA8CBAA00A7152D /* Keychain.swift */; };
 		04E41C692BA473460095C411 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C682BA473460095C411 /* WidgetKit.framework */; };
 		04E41C6B2BA473460095C411 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C6A2BA473460095C411 /* SwiftUI.framework */; };
@@ -99,8 +99,8 @@
 		048DD12D2BA8E22A0064F663 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		048DD1362BA8E3300064F663 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		048DD1382BA8E34C0064F663 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		048DD13B2BA8E38F0064F663 /* DebouncedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncedState.swift; sourceTree = "<group>"; };
 		048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableNavigationLink.swift; sourceTree = "<group>"; };
-		048FB4D82BA78CD00062EE05 /* DebouncedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncedState.swift; sourceTree = "<group>"; };
 		04A379922BA8CBAA00A7152D /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		04E41C662BA473460095C411 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E41C682BA473460095C411 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -192,7 +192,6 @@
 				04E41D3E2BA5A0320095C411 /* Models */,
 				04E41D6A2BA6E2EB0095C411 /* Playgrounds */,
 				04490B5B2BA46AB7009E5034 /* Preview Content */,
-				048FB4D72BA78CC30062EE05 /* Utils */,
 				04E41C7F2BA47B7C0095C411 /* Views */,
 			);
 			path = GoogleSheetsWidget;
@@ -209,6 +208,7 @@
 		048DD1272BA8E21C0064F663 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				048DD13A2BA8E3800064F663 /* Utils */,
 				048DD1352BA8E2BF0064F663 /* Extensions */,
 			);
 			path = Shared;
@@ -224,10 +224,10 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		048FB4D72BA78CC30062EE05 /* Utils */ = {
+		048DD13A2BA8E3800064F663 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				048FB4D82BA78CD00062EE05 /* DebouncedState.swift */,
+				048DD13B2BA8E38F0064F663 /* DebouncedState.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -435,7 +435,6 @@
 				04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */,
 				04490B562BA46AB5009E5034 /* Application.swift in Sources */,
 				04E41D722BA7236C0095C411 /* CustomForm.swift in Sources */,
-				048FB4D92BA78CD00062EE05 /* DebouncedState.swift in Sources */,
 				04A379932BA8CBAA00A7152D /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				048DD12E2BA8E22A0064F663 /* URL.swift in Sources */,
+				048DD13C2BA8E38F0064F663 /* DebouncedState.swift in Sources */,
 				048DD1372BA8E3300064F663 /* URLSession.swift in Sources */,
 				048DD1392BA8E34C0064F663 /* URLRequest.swift in Sources */,
 			);

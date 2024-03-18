@@ -1,10 +1,10 @@
 import Foundation
 
-class DebouncedState<Value>: ObservableObject {
-    @Published var currentValue: Value
-    @Published var debouncedValue: Value
+public class DebouncedState<Value>: ObservableObject {
+    @Published public var currentValue: Value
+    @Published public var debouncedValue: Value
     
-    init(initialValue: Value, delay: Double = 0.3) {
+    public init(initialValue: Value, delay: Double = 0.3) {
         _currentValue = Published(initialValue: initialValue)
         _debouncedValue = Published(initialValue: initialValue)
         $currentValue
