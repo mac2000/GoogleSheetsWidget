@@ -160,77 +160,15 @@ struct SafariWebView: UIViewControllerRepresentable {
 }
 
 struct RefreshTokenStorage {
-//    static let log = Logger("RefreshTokenStorage")
-    
     static func get() -> String? {
         return Keychain.get("refresh_token")
-//        var result: CFTypeRef?
-//        let status = SecItemCopyMatching([
-//            kSecClass: kSecClassGenericPassword,
-//            kSecAttrService: service,
-//            kSecAttrAccount: account,
-//            kSecAttrAccessGroup: group,
-//            kSecReturnData: kCFBooleanTrue as Any,
-//            kSecMatchLimit: kSecMatchLimitOne
-//        ] as CFDictionary, &result)
-//        
-//        guard status == errSecSuccess,
-//              let data = result as? Data,
-//              let token = String(data: data, encoding: .utf8) else {
-//            let message = String(SecCopyErrorMessageString(status, nil) ?? "unknown" as CFString)
-//            log.warning("token not retrieved because: \(message)")
-//            return nil
-//        }
-//        
-//        return token
     }
     
     static func set(_ value: String?) {
-        //Keychain.set("refresh_token", value)
-//        guard let value = value else {
-//            log.warning("token will be deleted - nil value passed")
-//            delete()
-//            return
-//        }
-//        guard let data = value.data(using: .utf8) else {
-//            log.warning("token not saved because: empty value given")
-//            return
-//        }
-//        
-//        let query = [
-//            kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrService as String: service,
-//            kSecAttrAccount as String: account,
-//            kSecAttrAccessGroup: group,
-//            kSecValueData as String: data
-//        ] as CFDictionary
-//        
-//        SecItemDelete(query as CFDictionary)
-//        
-//        let status = SecItemAdd(query, nil)
-//        
-//        if status == errSecSuccess {
-//            log.info("token saved")
-//        } else {
-//            let message = String(SecCopyErrorMessageString(status, nil) ?? "unknown" as CFString)
-//            log.warning("token not saved because: \(message)")
-//        }
+        Keychain.set("refresh_token", value)
     }
     
     static func delete() {
-        //Keychain.delete("refresh_token")
-//        let status = SecItemDelete([
-//            kSecClass: kSecClassGenericPassword,
-//            kSecAttrService: service,
-//            kSecAttrAccount: account,
-//            kSecAttrAccessGroup: group
-//        ] as CFDictionary)
-//        
-//        if status == errSecSuccess {
-//            log.info("token deleted")
-//        } else {
-//            let message = String(SecCopyErrorMessageString(status, nil) ?? "unknown" as CFString)
-//            log.warning("token not deleted because: \(message)")
-//        }
+        Keychain.delete("refresh_token")
     }
 }
