@@ -2,6 +2,7 @@ import SwiftUI
 import CryptoKit
 import SafariServices
 import OSLog
+import Shared
 
 @Observable
 class Auth {

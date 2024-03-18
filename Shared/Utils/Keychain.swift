@@ -1,12 +1,12 @@
-import SwiftUI
+import Foundation
 import OSLog
 
-struct Keychain {
-    static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Keychain")
-    static let service = Bundle.main.bundleIdentifier!
-    static let group = "group.GoogleSheetsWidget" // FIXME: MUST be synced with actual app group manually
+public class Keychain {
+    private static let log = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Keychain")
+    private static let service = Bundle.main.bundleIdentifier!
+    private static let group = "group.GoogleSheetsWidget" // FIXME: MUST be synced with actual app group manually
 
-    static func get(_ key: String) -> String? {
+    public static func get(_ key: String) -> String? {
         var result: CFTypeRef?
         let status = SecItemCopyMatching([
             kSecClass: kSecClassGenericPassword,
@@ -28,7 +28,7 @@ struct Keychain {
         return value
     }
 
-    static func set(_ key: String, _ value: String?) {
+    public static func set(_ key: String, _ value: String?) {
         guard let value = value else {
             log.warning("removing '\(key)' from keychain because: nil value were passed")
             delete(key)
@@ -59,7 +59,7 @@ struct Keychain {
         }
     }
 
-    static func delete(_ key: String) {
+    public static func delete(_ key: String) {
         let status = SecItemDelete([
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
