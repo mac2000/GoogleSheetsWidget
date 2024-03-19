@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Shared
 import OSLog
 
 struct WatcherFormView: View {
@@ -79,14 +80,14 @@ struct WatcherFormView: View {
     }
     
     func load() async throws -> [Spreadsheet] {
-        guard let token = try await auth.refresh() else { return [] }
-        return try await GoogleSpreadsheets.getSpreadsheets(accessToken: token)
+        guard let token = await auth.refresh() else { return [] }
+        return await GoogleSheets.getSpreadsheets(token, "")
     }
     
     func loadSheets() async throws -> [String] {
         if item.spreadsheetId != nil {
-            guard let token = try await auth.refresh() else { return [] }
-            return try await GoogleSpreadsheets.getSheets(accessToken: token, spreadsheetId: item.spreadsheetId!)
+            guard let token = await auth.refresh() else { return [] }
+            return await GoogleSheets.getSheets(token, item.spreadsheetId!)
         }
         return []
     }

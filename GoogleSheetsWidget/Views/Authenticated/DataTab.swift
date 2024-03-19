@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Shared
 import OSLog
 
 struct DataTab: View {
@@ -72,25 +73,23 @@ struct DataTab: View {
     }
     
     func refresh() async {
-        do {
-            guard let token = try await auth.refresh() else { return }
-            for item in items {
-                guard let spreadsheetId = item.spreadsheetId,
-                   let sheetName = item.sheetName else {
-                    log.info("skipping \(item.title)")
-                    continue
-                }
-                log.info("\(item.title)")
-                let value = try await GoogleSpreadsheets.getValue(accessToken: token, spreadsheetId: spreadsheetId, sheetName: sheetName, column: item.column, row: item.row)
-                
-                log.info("\(value)")
-                // item.value = value
-                item.setValue(value: value)
+        
+        guard let token = await auth.refresh() else { return }
+        for item in items {
+            guard let spreadsheetId = item.spreadsheetId,
+                  let sheetName = item.sheetName else {
+                log.info("skipping \(item.title)")
+                continue
             }
-            //try modelContext.save()
-        } catch {
-            log.warning("can not refresh: \(error.localizedDescription)")
+            log.info("\(item.title)")
+            let value = await GoogleSheets.getValue(token, spreadsheetId, sheetName, item.column, item.row)
+            
+            log.info("\(value)")
+            // item.value = value
+            item.setValue(value: value)
         }
+        //try modelContext.save()
+        
     }
 }
 

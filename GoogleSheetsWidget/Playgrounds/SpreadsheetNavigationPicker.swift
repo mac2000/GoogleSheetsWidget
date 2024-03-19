@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 
 struct SpreadsheetNavigationPicker: View {
     @State private var number = 1

@@ -27,25 +27,13 @@ struct PreviewApi: View {
         .navigationTitle("Spreadsheet")
         .navigationBarTitleDisplayMode(.inline)
         .task { await load() }
-        //.refreshable { await load() }
+        .refreshable { await load() }
         .searchable(text: $search.currentValue)
         .onChange(of: search.debouncedValue, { oldValue, newValue in
             Task { await load() }
         })
-        //.onSubmit(of: .search) {
-        //    Task { await load() }
-        //}
         .onChange(of: item) { _, _ in
             dismiss()
-        }
-    }
-    
-    var q: String {
-        if search.debouncedValue == "" {
-            return "mimeType='application/vnd.google-apps.spreadsheet'"
-        } else {
-            let name = search.debouncedValue.replacingOccurrences(of: "'", with: "\'")
-            return "mimeType='application/vnd.google-apps.spreadsheet' and name contains '\(name)'"
         }
     }
     
@@ -55,14 +43,7 @@ struct PreviewApi: View {
             loading = false
         }
         
-        guard let url = URL(string: "https://www.googleapis.com/drive/v3/files")?.withQueryStringParameter("q", q) else { return }
-        
-        print("URL", url)
-        let request = URLRequest(url: url, accessToken: accessToken)
-        
-        let response: SpreadsheetsListResponse? = try? await URLSession.shared.decoded(request)
-        
-        self.items = response?.files ?? []
+        self.items = await GoogleSheets.getSpreadsheets(accessToken, search.debouncedValue)
     }
 }
 

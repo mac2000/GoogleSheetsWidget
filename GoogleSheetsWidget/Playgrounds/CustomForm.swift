@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 
 struct CustomForm: View {
     @State private var number = 1

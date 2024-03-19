@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Shared
 
 @main
 struct Application: App {
@@ -9,8 +10,17 @@ struct Application: App {
 //            NavigationStack { SpreadsheetNavigationPicker() }
             ContentView()
                 .environment(auth)
-                .onOpenURL(perform: auth.exchange)
+                .onOpenURL(perform: self.onOpenURL) // auth.exchange)
                 .modelContainer(for: Watcher.self)
+        }
+    }
+    
+    func onOpenURL(_ url: URL) {
+        Task {
+            let response = await GoogleAuth.exchange(url)
+            print("retrieved", response?.refreshToken ?? "nil")
+            let res2 = await GoogleAuth.refresh(response!.refreshToken)
+            print("refreshed", res2 ?? "nil")
         }
     }
 }

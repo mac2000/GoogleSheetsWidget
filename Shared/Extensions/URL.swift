@@ -1,7 +1,7 @@
 import Foundation
 
 public extension URL {
-    init?(url: String, query: [String: String]) {
+    init?(_ url: String, _ query: [String: String]) {
         guard var components = URLComponents(string: url) else { return nil }
         components.queryItems = query.map { URLQueryItem(name: $0.key, value: $0.value) }
         guard let url = components.url else { return nil }
