@@ -21,7 +21,11 @@
 		048DD1402BA8E4C30064F663 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD13F2BA8E4C30064F663 /* Logger.swift */; };
 		048DD1432BA96CA10064F663 /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1422BA96CA10064F663 /* GoogleAuth.swift */; };
 		048DD1452BAA21F70064F663 /* GoogleSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1442BAA21F70064F663 /* GoogleSheets.swift */; };
+		048DD1472BAA39B10064F663 /* SubListsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1462BAA39B10064F663 /* SubListsDemo.swift */; };
+		048DD1492BAB8F6C0064F663 /* DeletePreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1482BAB8F6C0064F663 /* DeletePreventer.swift */; };
 		048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */; };
+		049938862BAD643C00596109 /* GridLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049938852BAD643C00596109 /* GridLikeView.swift */; };
+		049938882BAD6ACA00596109 /* GridPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049938872BAD6ACA00596109 /* GridPreview.swift */; };
 		04E41C692BA473460095C411 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C682BA473460095C411 /* WidgetKit.framework */; };
 		04E41C6B2BA473460095C411 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C6A2BA473460095C411 /* SwiftUI.framework */; };
 		04E41C6E2BA473460095C411 /* WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C6D2BA473460095C411 /* WidgetsBundle.swift */; };
@@ -105,7 +109,11 @@
 		048DD13F2BA8E4C30064F663 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		048DD1422BA96CA10064F663 /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
 		048DD1442BAA21F70064F663 /* GoogleSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSheets.swift; sourceTree = "<group>"; };
+		048DD1462BAA39B10064F663 /* SubListsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListsDemo.swift; sourceTree = "<group>"; };
+		048DD1482BAB8F6C0064F663 /* DeletePreventer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePreventer.swift; sourceTree = "<group>"; };
 		048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableNavigationLink.swift; sourceTree = "<group>"; };
+		049938852BAD643C00596109 /* GridLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLikeView.swift; sourceTree = "<group>"; };
+		049938872BAD6ACA00596109 /* GridPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPreview.swift; sourceTree = "<group>"; };
 		04E41C662BA473460095C411 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E41C682BA473460095C411 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		04E41C6A2BA473460095C411 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -304,6 +312,10 @@
 				04E41D6F2BA6FF970095C411 /* PreviewApi.swift */,
 				04E41D712BA7236C0095C411 /* CustomForm.swift */,
 				048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */,
+				048DD1462BAA39B10064F663 /* SubListsDemo.swift */,
+				048DD1482BAB8F6C0064F663 /* DeletePreventer.swift */,
+				049938852BAD643C00596109 /* GridLikeView.swift */,
+				049938872BAD6ACA00596109 /* GridPreview.swift */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -440,13 +452,17 @@
 				04E41D702BA6FF970095C411 /* PreviewApi.swift in Sources */,
 				04E41C8C2BA49B2D0095C411 /* SettingsTab.swift in Sources */,
 				048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */,
+				049938882BAD6ACA00596109 /* GridPreview.swift in Sources */,
 				04E41D402BA5A05E0095C411 /* Data.swift in Sources */,
 				04E41C8E2BA4A6340095C411 /* DataTab.swift in Sources */,
 				04E41D432BA5B6BE0095C411 /* WatcherFormView.swift in Sources */,
+				048DD1472BAA39B10064F663 /* SubListsDemo.swift in Sources */,
 				04E41D482BA5C3360095C411 /* Auth.swift in Sources */,
 				04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */,
 				04490B562BA46AB5009E5034 /* Application.swift in Sources */,
+				048DD1492BAB8F6C0064F663 /* DeletePreventer.swift in Sources */,
 				04E41D722BA7236C0095C411 /* CustomForm.swift in Sources */,
+				049938862BAD643C00596109 /* GridLikeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

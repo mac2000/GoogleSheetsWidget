@@ -11,6 +11,7 @@ struct WatcherFormView: View {
     @State var selectedSpreadsheet: Spreadsheet?
     @State var spreadsheets: [Spreadsheet] = []
     @State var sheets: [String] = []
+    
     let columns: [String] = (Unicode.Scalar("A").value...Unicode.Scalar("Z").value).map{"\(UnicodeScalar($0)!)"}
     
     var body: some View {

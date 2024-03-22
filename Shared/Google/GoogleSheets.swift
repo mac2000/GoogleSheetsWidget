@@ -18,11 +18,18 @@ public class GoogleSheets {
         return (response?.sheets ?? []).map { $0.properties.title }
     }
     
+    public static func getValues(_ accessToken: String, _ spreadsheetId: String, _ sheetName: String, _ range: String) async -> [[String]] {
+        guard let url = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(spreadsheetId)/values/\(sheetName)!\(range)") else { return [[]] }
+        let request = URLRequest(url: url, accessToken: accessToken)
+        let response: GetValueResponse? = try? await URLSession.shared.decoded(request)
+        return response?.values ?? [[]]
+    }
+    
     public static func getValue(_ accessToken: String, _ spreadsheetId: String, _ sheetName: String, _ column: String, _ row: Int) async -> String {
         guard let url = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(spreadsheetId)/values/\(sheetName)!\(column)\(row)") else { return "" }
         let request = URLRequest(url: url, accessToken: accessToken)
         let response: GetValueResponse? = try? await URLSession.shared.decoded(request)
-        return response?.values[0][0] ?? ""
+        return response?.values.first?.first ?? ""
     }
     
     private static func q(_ search: String) -> String {
