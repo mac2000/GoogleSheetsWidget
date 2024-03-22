@@ -42,6 +42,9 @@ struct DataTab: View {
                     ContentUnavailableView("No data", systemImage: "doc.text", description: Text("Tap on \"+\" button on top right corner"))
                 }
             }
+            .task {
+                await self.refresh()
+            }
             .refreshable {
                 await self.refresh()
             }
@@ -74,7 +77,7 @@ struct DataTab: View {
     
     func refresh() async {
         
-        guard let token = await auth.refresh() else { return }
+        guard let accessToken = await auth.refresh() else { return }
         for item in items {
             guard let spreadsheetId = item.spreadsheetId,
                   let sheetName = item.sheetName else {
@@ -82,11 +85,11 @@ struct DataTab: View {
                 continue
             }
             log.info("\(item.title)")
-            let value = await GoogleSheets.getValue(token, spreadsheetId, sheetName, item.column, item.row)
+            let value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
             
             log.info("\(value)")
-            // item.value = value
-            item.setValue(value: value)
+            item.value = value
+            //item.setValue(value: value)
         }
         //try modelContext.save()
         

@@ -57,7 +57,11 @@ class Auth {
         }
 
         guard let refreshToken = self.refreshToken else { return nil }
-        guard let response = await GoogleAuth.refresh(refreshToken) else { return nil }
+        guard let response = await GoogleAuth.refresh(refreshToken) else {
+            log.info("unable to refresh token, logging out")
+            logout()
+            return nil
+        }
         print("response", response)
         
         self.accessToken = response.accessToken
