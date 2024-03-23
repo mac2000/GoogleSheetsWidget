@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CellView: View {
-    var item: Watcher
+    @Bindable var item: Watcher
     var selector: String {
         return "\(sheetName)!\(item.column)\(item.row)"
     }
@@ -14,6 +14,9 @@ struct CellView: View {
     var value: String {
         return item.value ?? "n/a"
     }
+    var color: HierarchicalShapeStyle {
+        return item.value == nil ? .secondary : .primary
+    }
     var body: some View {
         HStack{
             VStack(alignment:.leading){
@@ -25,7 +28,7 @@ struct CellView: View {
                 }.font(.caption).foregroundStyle(.secondary).lineLimit(1)
             }
             Spacer()
-            Text(value).foregroundStyle(value == "n/a" ? .secondary : .primary)
+            Text(value).foregroundStyle(color)
         }
     }
 }

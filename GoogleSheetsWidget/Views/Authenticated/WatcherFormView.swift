@@ -21,8 +21,9 @@ struct WatcherFormView: View {
             Section("Spreadsheet") {
                 NavigationLink {
                     SpreadsheetPicker() { selected in
-                        item.spreadsheetId = selectedSpreadsheet!.id
-                        item.spreadsheetName = selectedSpreadsheet!.name
+                        print("selected \(selected.name)")
+                        item.spreadsheetId = selected.id
+                        item.spreadsheetName = selected.name
                         Task {
                             self.sheets = await self.loadSheets()
                         }
@@ -111,8 +112,9 @@ struct WatcherFormView: View {
         guard let accessToken = await auth.refresh() else { return }
         if let spreadsheetId = item.spreadsheetId,
            let sheetName = item.sheetName {
-            item.value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
-            print("refreshed")
+            let value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
+            item.setValue(value: value)
+            print("refreshed \(sheetName)!\(item.column)\(item.row): \(item.value ?? "n/a")")
         } else {
             print("not refreshed, some properties are empty")
         }

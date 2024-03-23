@@ -72,7 +72,7 @@ struct DataTab: View {
                 log.info("skipping \(item.title)")
                 continue
             }
-            log.info("\(item.title)")
+            log.info("refreshed \(sheetName)!\(item.column)\(item.row): \(item.title)")
             let value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
             
             item.value = value
