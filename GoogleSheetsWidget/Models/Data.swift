@@ -26,11 +26,6 @@ class Watcher {
         self.row = row
     }
     
-//    func setValue(value: String) {
-//        print(">>>>>> \(title) \(value)")
-//        self.value = value
-//    }
-    
     #if DEBUG
     static let example1 = Watcher(title: "Hello", spreadsheetId: "1", spreadsheetName: "Demo", sheetName: "Sheet1", column: "A", row: 1)
     static let example2 = Watcher(title: "World", spreadsheetId: "1", spreadsheetName: "Demo", sheetName: "Sheet1", column: "A", row: 2)

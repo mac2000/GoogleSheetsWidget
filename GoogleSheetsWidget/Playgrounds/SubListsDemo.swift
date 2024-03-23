@@ -62,7 +62,7 @@ struct SubListsDemo: View {
                         }
                     }
                     .onDelete(perform: { indexSet in
-                        for index in indexSet {
+                        for _ in indexSet {
                             //self.storage.removeChild(parentId: parent.id, childId: parent.items[index].id)
                         }
                     })

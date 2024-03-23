@@ -76,7 +76,6 @@ struct DataTab: View {
     }
     
     func refresh() async {
-        
         guard let accessToken = await auth.refresh() else { return }
         for item in items {
             guard let spreadsheetId = item.spreadsheetId,
@@ -87,12 +86,8 @@ struct DataTab: View {
             log.info("\(item.title)")
             let value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
             
-            log.info("\(value)")
             item.value = value
-            //item.setValue(value: value)
         }
-        //try modelContext.save()
-        
     }
 }
 
