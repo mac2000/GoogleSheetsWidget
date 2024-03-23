@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		043DD5BE2BADE8820036649D /* SpreadsheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DD5BD2BADE8820036649D /* SpreadsheetPicker.swift */; };
+		043DD5C12BAEB7E00036649D /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DD5C02BAEB7E00036649D /* CellView.swift */; };
 		04490B562BA46AB5009E5034 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B552BA46AB5009E5034 /* Application.swift */; };
 		04490B582BA46AB5009E5034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B572BA46AB5009E5034 /* ContentView.swift */; };
 		04490B5A2BA46AB7009E5034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B592BA46AB7009E5034 /* Assets.xcassets */; };
@@ -97,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		043DD5BD2BADE8820036649D /* SpreadsheetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetPicker.swift; sourceTree = "<group>"; };
+		043DD5C02BAEB7E00036649D /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		04490B532BA46AB5009E5034 /* GoogleSheetsWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSheetsWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04490B552BA46AB5009E5034 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		04490B572BA46AB5009E5034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,14 @@
 				043DD5BD2BADE8820036649D /* SpreadsheetPicker.swift */,
 			);
 			path = Pickers;
+			sourceTree = "<group>";
+		};
+		043DD5BF2BAEB7D10036649D /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				043DD5C02BAEB7E00036649D /* CellView.swift */,
+			);
+			path = Particles;
 			sourceTree = "<group>";
 		};
 		04490B112BA465DD009E5034 = {
@@ -287,6 +297,7 @@
 		04E41C7F2BA47B7C0095C411 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				043DD5BF2BAEB7D10036649D /* Particles */,
 				043DD5BC2BADE8730036649D /* Pickers */,
 				04E41C8A2BA49B1F0095C411 /* Authenticated */,
 				04490B572BA46AB5009E5034 /* ContentView.swift */,
@@ -475,6 +486,7 @@
 				048DD1492BAB8F6C0064F663 /* DeletePreventer.swift in Sources */,
 				04E41D722BA7236C0095C411 /* CustomForm.swift in Sources */,
 				049938862BAD643C00596109 /* GridLikeView.swift in Sources */,
+				043DD5C12BAEB7E00036649D /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

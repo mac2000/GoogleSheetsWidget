@@ -12,8 +12,6 @@ struct WatcherFormView: View {
     @State var spreadsheets: [Spreadsheet] = []
     @State var sheets: [String] = []
     
-    let columns: [String] = (Unicode.Scalar("A").value...Unicode.Scalar("Z").value).map{"\(UnicodeScalar($0)!)"}
-    
     var body: some View {
         Form {
             Section("General") {
@@ -21,18 +19,20 @@ struct WatcherFormView: View {
             }
             
             Section("Spreadsheet") {
-                Picker("Spreadsheet", selection: $selectedSpreadsheet) {
-                    Text("Unknown").tag(Optional<Spreadsheet>.none)
-                    ForEach(spreadsheets) { spreadsheet in
-                        Text(spreadsheet.name).tag(Optional(spreadsheet))
-                    }
-                }.onChange(of: selectedSpreadsheet) {
-                    if selectedSpreadsheet != nil {
+                NavigationLink {
+                    SpreadsheetPicker() { selected in
                         item.spreadsheetId = selectedSpreadsheet!.id
                         item.spreadsheetName = selectedSpreadsheet!.name
                         Task {
-                            self.sheets = try await self.loadSheets()
+                            self.sheets = await self.loadSheets()
                         }
+                    }
+                } label: {
+                    HStack {
+                        Text("Spreadsheet")
+                        Spacer()
+                        Text(selectedSpreadsheet?.name ?? "unkown")
+                            .foregroundStyle(selectedSpreadsheet == nil ? .secondary : .primary)
                     }
                 }
                 
@@ -42,56 +42,83 @@ struct WatcherFormView: View {
                         ForEach(sheets, id: \.self) { sheet in
                             Text(sheet).tag(Optional(sheet))
                         }
+                    }.onChange(of: item.sheetName) { oldValue, newValue in
+                        print("changed sheet")
                     }
                 }
                 
                 Picker("Column", selection: $item.column) {
                     Text("Unknown").tag(Optional<String>.none)
                     ForEach(columns, id: \.self) { column in
-                            Text(column)
+                        Text(column)
                     }
                 }
                 
                 Picker("Row", selection: $item.row) {
                     ForEach(1...30, id: \.self) { row in
-                            Text("\(row)")
+                        Text("\(row)")
                     }
                 }
+            }
+            
+            Section("Preview") {
+                CellView(item: item)
             }
         }
         .navigationTitle("Track")
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            do {
-                self.spreadsheets = try await load()
-                let found = self.spreadsheets.first { spreadsheet in
-                    spreadsheet.id == item.spreadsheetId
-                }
-                if found != nil {
-                    self.selectedSpreadsheet = found
-                } else {
-                    self.selectedSpreadsheet = self.spreadsheets[0]
-                }
-                self.sheets = try await loadSheets()
-            } catch {
-                log.error("failed retrieve spreadsheets because of \(error.localizedDescription)")
+            self.spreadsheets = await load()
+            let found = self.spreadsheets.first { spreadsheet in
+                spreadsheet.id == item.spreadsheetId
             }
+            if found != nil {
+                self.selectedSpreadsheet = found
+            } else if !self.spreadsheets.isEmpty {
+                self.selectedSpreadsheet = self.spreadsheets[0]
+            }
+            self.sheets = await loadSheets()
+            await refresh()
         }
+        .refreshable { await refresh() }
         
     }
     
-    func load() async throws -> [Spreadsheet] {
-        guard let token = await auth.refresh() else { return [] }
-        return await GoogleSheets.getSpreadsheets(token, "")
+    func load() async -> [Spreadsheet] {
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            return GoogleSheetsPreview.spreadsheets
+        }
+        guard let accessToken = await auth.refresh() else { return [] }
+        return await GoogleSheets.getSpreadsheets(accessToken, "")
     }
     
-    func loadSheets() async throws -> [String] {
+    func loadSheets() async -> [String] {
         if item.spreadsheetId != nil {
-            guard let token = await auth.refresh() else { return [] }
-            return await GoogleSheets.getSheets(token, item.spreadsheetId!)
+            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+                return GoogleSheetsPreview.sheets
+            }
+            guard let accessToken = await auth.refresh() else { return [] }
+            return await GoogleSheets.getSheets(accessToken, item.spreadsheetId!)
         }
         return []
     }
+    
+    func refresh() async {
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            item.value = "\(Int.random(in: 0...100))"
+            return
+        }
+        guard let accessToken = await auth.refresh() else { return }
+        if let spreadsheetId = item.spreadsheetId,
+           let sheetName = item.sheetName {
+            item.value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
+            print("refreshed")
+        } else {
+            print("not refreshed, some properties are empty")
+        }
+    }
+    
+    private let columns: [String] = (Unicode.Scalar("A").value...Unicode.Scalar("Z").value).map{"\(UnicodeScalar($0)!)"}
 }
 
 #Preview {

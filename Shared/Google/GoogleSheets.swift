@@ -42,6 +42,16 @@ public class GoogleSheets {
     }
 }
 
+public class GoogleSheetsPreview {
+    public static let spreadsheets: [Spreadsheet] = [
+        Spreadsheet(id: "1", name: "Demo"),
+        Spreadsheet(id: "2", name: "Hello"),
+        Spreadsheet(id: "3", name: "Untitled")
+    ]
+    
+    public static let sheets: [String] = [ "Sheet1", "Sheet2", "Sheet3" ]
+}
+
 struct GetSpreadsheetsResponse: Codable {
     let files: [Spreadsheet]
 }

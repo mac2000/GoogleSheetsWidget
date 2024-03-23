@@ -16,18 +16,7 @@ struct DataTab: View {
                 Section("Tracking") {
                     ForEach(items) { item in
                         NavigationLink(value: item) {
-                            HStack{
-                                VStack(alignment:.leading){
-                                    Text(item.title)
-                                    HStack{
-                                        Text("\(item.sheetName ?? "unknown")!\(item.column)\(item.row)")
-                                        Text("/")
-                                        Text(item.spreadsheetName ?? "unknown")
-                                    }.font(.caption).foregroundStyle(.secondary).lineLimit(1)
-                                }
-                                Spacer()
-                                Text(item.value ?? "N/A")
-                            }
+                            CellView(item: item)
                         }
                     }
                     .onDelete(perform: delete)

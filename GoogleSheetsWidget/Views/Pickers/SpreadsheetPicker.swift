@@ -74,20 +74,22 @@ struct SpreadsheetPicker: View {
     func load() async {
         loading = true
         defer { loading = false }
-        // item = nil
-        // pretend we are retrieving list from backend
-        let sleepSeconds = 1
-        try? await Task.sleep(nanoseconds: UInt64(sleepSeconds) * NSEC_PER_SEC)
-        var items = (1...20).map { num in
-            let name = "Item \(num)"
-            return Spreadsheet(id: "\(num)", name: name)
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            let sleepSeconds = 1
+            try? await Task.sleep(nanoseconds: UInt64(sleepSeconds) * NSEC_PER_SEC)
+            var items = (1...20).map { num in
+                let name = "Item \(num)"
+                return Spreadsheet(id: "\(num)", name: name)
+            }
+            
+            if search.debouncedValue != "" {
+                items = items.filter { $0.name.localizedStandardContains(search.debouncedValue) }
+            }
+            self.retrieved = items
+            return
         }
-        
-        if search.debouncedValue != "" {
-            items = items.filter { $0.name.localizedStandardContains(search.debouncedValue) }
-        }
-        
-        self.retrieved = items
+        guard let accessToken = await auth.refresh() else { return }
+        self.retrieved = await GoogleSheets.getSpreadsheets(accessToken, search.debouncedValue)
     }
 }
 
