@@ -3,19 +3,6 @@ import SwiftData
 import Shared
 import OSLog
 
-final actor WatcherFormViewModel {
-    func loadSheets(auth: Auth, item: Watcher) async -> [String] {
-        let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
-        
-        if item.spreadsheetId == "" || isPreview {
-            return GoogleSheetsPreview.sheets
-        }
-
-        guard let accessToken = await auth.refresh() else { return [] }
-        return await GoogleSheets.getSheets(accessToken, item.spreadsheetId)
-    }
-}
-
 struct WatcherFormView: View {
     let log = Logger("WatcherFormView")
     @Environment(Auth.self) var auth
@@ -24,7 +11,6 @@ struct WatcherFormView: View {
     @State var selectedSpreadsheet: Spreadsheet?
     @State var spreadsheets: [Spreadsheet] = []
     @State var sheets: [String] = []
-    @State var vm = WatcherFormViewModel()
     
     var body: some View {
         Form {
@@ -39,7 +25,7 @@ struct WatcherFormView: View {
                         item.spreadsheetId = selected.id
                         item.spreadsheetName = selected.name
                         Task {
-                            self.sheets =  await vm.loadSheets(auth: auth, item: item)
+                            self.sheets =  await loadSheets()
                         }
                     }
                 } label: {
@@ -51,15 +37,13 @@ struct WatcherFormView: View {
                     }
                 }
                 
-                if selectedSpreadsheet != nil {
-                    Picker("Sheet", selection: $item.sheetName) {
-                        Text("Unknown").tag(Optional<String>.none)
-                        ForEach(sheets, id: \.self) { sheet in
-                            Text(sheet).tag(Optional(sheet))
-                        }
-                    }.onChange(of: item.sheetName) { oldValue, newValue in
-                        print("changed sheet")
+                Picker("Sheet", selection: $item.sheetName) {
+                    Text("Unknown").tag(Optional<String>.none)
+                    ForEach(sheets, id: \.self) { sheet in
+                        Text(sheet).tag(Optional(sheet))
                     }
+                }.onChange(of: item.sheetName) { oldValue, newValue in
+                    print("changed sheet")
                 }
                 
                 Picker("Column", selection: $item.column) {
@@ -74,6 +58,9 @@ struct WatcherFormView: View {
                         Text("\(row)")
                     }
                 }
+                
+                Toggle("Numberic", isOn: $item.numeric)
+                Toggle("Colored", isOn: $item.colored).disabled(!item.numeric).foregroundStyle(item.numeric ? .primary : .secondary)
             }
             
             Section("Preview") {
@@ -92,10 +79,13 @@ struct WatcherFormView: View {
             } else if !self.spreadsheets.isEmpty {
                 self.selectedSpreadsheet = self.spreadsheets[0]
             }
-            self.sheets = await vm.loadSheets(auth: auth, item: item)
+            self.sheets = await loadSheets()
             await refresh()
         }
         .refreshable { await refresh() }
+        .onChange(of: item) { _, _ in
+            Task { await refresh() }
+        }
         
     }
     
@@ -107,7 +97,16 @@ struct WatcherFormView: View {
         return await GoogleSheets.getSpreadsheets(accessToken, "")
     }
     
-    
+    @MainActor func loadSheets() async -> [String] {
+        let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+        
+        if item.spreadsheetId == "" || isPreview {
+            return GoogleSheetsPreview.sheets
+        }
+
+        guard let accessToken = await auth.refresh() else { return [] }
+        return await GoogleSheets.getSheets(accessToken, item.spreadsheetId)
+    }
     
     @MainActor func refresh() async {
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
