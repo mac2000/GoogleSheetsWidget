@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 
 struct CellView: View {
     @Bindable var item: Watcher
@@ -6,16 +7,16 @@ struct CellView: View {
         return "\(sheetName)!\(item.column)\(item.row)"
     }
     var spreadsheetName: String {
-        return item.spreadsheetName ?? "unknown"
+        return item.spreadsheetName == "" ? "unknown" : item.spreadsheetName
     }
     var sheetName: String {
-        return item.sheetName ?? "unknown"
+        return item.sheetName == "" ? "unknown" : item.sheetName
     }
     var value: String {
-        return item.value ?? "n/a"
+        return item.value == "" ? "n/a" : item.value
     }
     var color: HierarchicalShapeStyle {
-        return item.value == nil ? .secondary : .primary
+        return item.value == "" ? .secondary : .primary
     }
     var body: some View {
         HStack{

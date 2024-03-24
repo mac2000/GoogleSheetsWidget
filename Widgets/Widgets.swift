@@ -1,5 +1,6 @@
 import WidgetKit
 import SwiftUI
+import SwiftData
 import Shared
 
 struct SimpleEntry: TimelineEntry {
@@ -11,6 +12,8 @@ struct Provider: TimelineProvider {
     //let auth = Auth()
     let auth = Auth.shared
     
+    @Query(sort: \Watcher.title) var items: [Watcher]
+    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), value: "N/A")
     }
@@ -19,21 +22,47 @@ struct Provider: TimelineProvider {
         let entry = SimpleEntry(date: Date(), value: "N/A")
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let value = "X" // auth.demo() ?? "unknown"
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, value: value)
-            entries.append(entry)
+        Task {
+            let items = await getItems()
+            print("Widget \(items.count)")
+            //let value = "\(items.count)" // auth.demo() ?? "unknown"
+            
+            var value = "n/a"
+            if let item = items.first,
+               let accessToken = await Auth.shared.refresh() {
+                let retrieved = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
+                value = retrieved == "" ? value : retrieved
+                print("widget value: \(value)")
+            }
+            
+            var entries: [SimpleEntry] = []
+            
+            // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+            let currentDate = Date()
+            for hourOffset in 0 ..< 5 {
+                let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+                let entry = SimpleEntry(date: entryDate, value: value)
+                entries.append(entry)
+            }
+            
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+    }
+    
+    @MainActor
+    private func getItems() -> [Watcher] {
+        do {
+            let container = try ModelContainer(for: Watcher.self)
+            let descriptor = FetchDescriptor<Watcher>()
+            let items = try container.mainContext.fetch(descriptor)
+            return items
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
     }
 }
 
@@ -56,14 +85,8 @@ struct Widgets: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                WidgetsEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                WidgetsEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
+            WidgetsEntryView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")

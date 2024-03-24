@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 import Shared
 import OSLog
+import WidgetKit
 
 struct DataTab: View {
     let log = Logger("WatchingListView")
@@ -77,6 +78,7 @@ struct DataTab: View {
             
             item.value = value
         }
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
 

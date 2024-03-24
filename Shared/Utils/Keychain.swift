@@ -1,9 +1,9 @@
 import Foundation
 import OSLog
 
-public class Keychain {
+public actor Keychain {
     private static let log = Logger("Keychain")
-    private static let service = Bundle.main.bundleIdentifier!
+    private static let service = "GoogleSheetsWidget" // Bundle.main.bundleIdentifier! // app vs widget bundle idenfiers are different
     private static let group = "group.GoogleSheetsWidget" // FIXME: MUST be synced with actual app group manually
 
     public static func get(_ key: String) -> String? {
