@@ -14,6 +14,7 @@
 		0444B21C2BB00C7E008B4CAD /* DISamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B21B2BB00C7E008B4CAD /* DISamples.swift */; };
 		0444B21E2BB01AA8008B4CAD /* AsyncViewFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B21D2BB01AA8008B4CAD /* AsyncViewFuncs.swift */; };
 		0444B2212BB0210F008B4CAD /* Watcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B2202BB0210F008B4CAD /* Watcher.swift */; };
+		0444B2252BB03A55008B4CAD /* NumberExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B2242BB03A55008B4CAD /* NumberExtractor.swift */; };
 		04490B562BA46AB5009E5034 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B552BA46AB5009E5034 /* Application.swift */; };
 		04490B582BA46AB5009E5034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B572BA46AB5009E5034 /* ContentView.swift */; };
 		04490B5A2BA46AB7009E5034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B592BA46AB7009E5034 /* Assets.xcassets */; };
@@ -106,6 +107,7 @@
 		0444B21B2BB00C7E008B4CAD /* DISamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DISamples.swift; sourceTree = "<group>"; };
 		0444B21D2BB01AA8008B4CAD /* AsyncViewFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncViewFuncs.swift; sourceTree = "<group>"; };
 		0444B2202BB0210F008B4CAD /* Watcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watcher.swift; sourceTree = "<group>"; };
+		0444B2242BB03A55008B4CAD /* NumberExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtractor.swift; sourceTree = "<group>"; };
 		04490B532BA46AB5009E5034 /* GoogleSheetsWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSheetsWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04490B552BA46AB5009E5034 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		04490B572BA46AB5009E5034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				0444B2152BAF7708008B4CAD /* ObservableActors.swift */,
 				0444B21B2BB00C7E008B4CAD /* DISamples.swift */,
 				0444B21D2BB01AA8008B4CAD /* AsyncViewFuncs.swift */,
+				0444B2242BB03A55008B4CAD /* NumberExtractor.swift */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				0444B21E2BB01AA8008B4CAD /* AsyncViewFuncs.swift in Sources */,
 				04E41D702BA6FF970095C411 /* PreviewApi.swift in Sources */,
 				04E41C8C2BA49B2D0095C411 /* SettingsTab.swift in Sources */,
+				0444B2252BB03A55008B4CAD /* NumberExtractor.swift in Sources */,
 				048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */,
 				043DD5BE2BADE8820036649D /* SpreadsheetPicker.swift in Sources */,
 				049938882BAD6ACA00596109 /* GridPreview.swift in Sources */,

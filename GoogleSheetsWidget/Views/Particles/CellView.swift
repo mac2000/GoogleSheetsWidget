@@ -15,9 +15,6 @@ struct CellView: View {
     var value: String {
         return item.value == "" ? "n/a" : item.value
     }
-    var color: HierarchicalShapeStyle {
-        return item.value == "" ? .secondary : .primary
-    }
     var body: some View {
         HStack{
             VStack(alignment:.leading){
@@ -29,7 +26,7 @@ struct CellView: View {
                 }.font(.caption).foregroundStyle(.secondary).lineLimit(1)
             }
             Spacer()
-            Text(value).foregroundStyle(color)
+            Text(value).foregroundStyle(item.color)
         }
     }
 }

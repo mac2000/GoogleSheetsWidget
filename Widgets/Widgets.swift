@@ -5,7 +5,7 @@ import Shared
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let value: String
+    let value: [Watcher]
 }
 
 struct Provider: TimelineProvider {
@@ -15,11 +15,11 @@ struct Provider: TimelineProvider {
     @Query(sort: \Watcher.title) var items: [Watcher]
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), value: "N/A")
+        SimpleEntry(date: Date(), value: [])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), value: "N/A")
+        let entry = SimpleEntry(date: Date(), value: [])
         completion(entry)
     }
     
@@ -43,7 +43,7 @@ struct Provider: TimelineProvider {
             let currentDate = Date()
             for hourOffset in 0 ..< 5 {
                 let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, value: value)
+                let entry = SimpleEntry(date: entryDate, value: items)
                 entries.append(entry)
             }
             
@@ -70,12 +70,13 @@ struct WidgetsEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack(spacing:8) {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Value:")
-            Text(entry.value)
+        Grid(alignment:.leading) {
+            ForEach(entry.value) { item in
+                GridRow {
+                    Text(item.title)
+                    Text(item.value).foregroundStyle(item.color)
+                }
+            }
         }
     }
 }
@@ -96,6 +97,6 @@ struct Widgets: Widget {
 #Preview(as: .systemSmall) {
     Widgets()
 } timeline: {
-    SimpleEntry(date: .now, value: "A")
-    SimpleEntry(date: .now, value: "B")
+    SimpleEntry(date: .now, value: [Watcher(title: "Demo", spreadsheetId: "1", spreadsheetName: "Sheet1", sheetName: "Sheet1", column: "A", row: 2)])
+    SimpleEntry(date: .now, value: [Watcher(title: "Demo", spreadsheetId: "1", spreadsheetName: "Sheet1", sheetName: "Sheet1", column: "A", row: 2)])
 }

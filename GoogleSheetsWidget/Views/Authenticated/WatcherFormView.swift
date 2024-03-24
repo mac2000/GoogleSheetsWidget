@@ -59,8 +59,7 @@ struct WatcherFormView: View {
                     }
                 }
                 
-                Toggle("Numberic", isOn: $item.numeric)
-                Toggle("Colored", isOn: $item.colored).disabled(!item.numeric).foregroundStyle(item.numeric ? .primary : .secondary)
+                Toggle("Colored", isOn: $item.colored)
             }
             
             Section("Preview") {
