@@ -1,6 +1,7 @@
 import SwiftUI
 import CryptoKit
 import SafariServices
+import Shared
 
 struct AnonymousView: View {
     @Environment(Auth.self) var auth
@@ -18,5 +19,5 @@ struct AnonymousView: View {
 
 #Preview {
     AnonymousView()
-        .environment(Auth())
+        .environment(Auth.shared)
 }

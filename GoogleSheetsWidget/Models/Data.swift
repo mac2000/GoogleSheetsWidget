@@ -2,23 +2,24 @@ import SwiftUI
 import SwiftData
 
 @Model
-class Watcher {
+final class Watcher: Sendable {
     var title: String
-    var value: String?
+    var value: String
 
-    var spreadsheetId: String?
-    var spreadsheetName: String?
+    var spreadsheetId: String
+    var spreadsheetName: String
 
-    var sheetName: String?
+    var sheetName: String
     var column: String
     var row: Int
 
     var isEmpty: Bool {
-        return title.isEmpty || spreadsheetName == nil || spreadsheetName == "" || sheetName == nil || sheetName == ""
+        return title.isEmpty  || spreadsheetName == "" || sheetName == ""
     }
     
     init(title: String, spreadsheetId: String, spreadsheetName: String, sheetName: String, column: String, row: Int) {
         self.title = title
+        self.value = ""
         self.spreadsheetId = spreadsheetId
         self.spreadsheetName = spreadsheetName
         self.sheetName = sheetName
@@ -26,7 +27,7 @@ class Watcher {
         self.row = row
     }
     
-    public func setValue(value: String?) {
+    public func setValue(value: String) {
         self.value = value
     }
     

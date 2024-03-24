@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 
 struct WidgetsTab: View {
     var body: some View {
@@ -25,5 +26,5 @@ struct WidgetsTab: View {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }
-    .environment(Auth())
+    .environment(Auth.shared)
 }

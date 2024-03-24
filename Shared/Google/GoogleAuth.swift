@@ -2,7 +2,7 @@ import Foundation
 import CryptoKit
 import OSLog
 
-public class GoogleAuth {
+public final actor GoogleAuth {
     private static let log = Logger("GoogleAuth")
     private static let clientId = "165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58.apps.googleusercontent.com"
     private static let redirectUri = "com.googleusercontent.apps.165877850855-o5k0ftcnlh8cukro95ujd4vspbghfp58:/callback"
@@ -58,17 +58,17 @@ public class GoogleAuth {
     }
 }
 
-public struct AuthTokens: Decodable {
-    public var accessToken: String
-    public var scope: String
-    public var tokenType: String
-    public var expiresIn: Int
+public struct AuthTokens: Decodable, Sendable {
+    public let accessToken: String
+    public let scope: String
+    public let tokenType: String
+    public let expiresIn: Int
 }
 
-public struct RefreshableAuthTokens: Decodable {
-    public var accessToken: String
-    public var scope: String
-    public var tokenType: String
-    public var expiresIn: Int
-    public var refreshToken: String
+public struct RefreshableAuthTokens: Decodable, Sendable {
+    public let accessToken: String
+    public let scope: String
+    public let tokenType: String
+    public let expiresIn: Int
+    public let refreshToken: String
 }

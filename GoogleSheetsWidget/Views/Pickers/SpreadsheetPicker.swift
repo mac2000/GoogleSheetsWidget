@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftData
-import Shared
+@preconcurrency import Shared
 
 struct SpreadsheetPicker: View {
     var onSelect: (Spreadsheet) -> Void
@@ -15,9 +15,8 @@ struct SpreadsheetPicker: View {
     var recent: [Spreadsheet] {
         var set = Set<Spreadsheet>()
         for item in items {
-            if let spreadsheetId = item.spreadsheetId,
-               let spreadsheetName = item.spreadsheetName {
-                set.insert(Spreadsheet(id: spreadsheetId, name: spreadsheetName))
+            if item.spreadsheetId != "" && item.spreadsheetName != "" {
+                set.insert(Spreadsheet(id: item.spreadsheetId, name: item.spreadsheetName))
             }
         }
         return Array(set).sorted { $0.name < $1.name }
@@ -66,7 +65,7 @@ struct SpreadsheetPicker: View {
     
     func row(_ item: Spreadsheet) -> some View {
         return Button(item.name) {
-            self.onSelect(item)
+             self.onSelect(item)
             dismiss()
         }.foregroundStyle(.primary)
     }
@@ -107,7 +106,7 @@ struct SpreadsheetPicker: View {
                 print("selected", item.name)
             }
         }
-        .environment(Auth())
+        .environment(Auth.shared)
         .modelContainer(container)
     } catch {
         fatalError("failed to create model container because of: \(error.localizedDescription)")

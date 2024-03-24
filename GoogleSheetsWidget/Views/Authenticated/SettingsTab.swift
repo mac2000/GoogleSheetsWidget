@@ -15,31 +15,27 @@ struct SettingsTab: View {
                 }
                 Section("Actions") {
                     Button("Logout", action: auth.logout)
-                    Button("Refresh", action: renew)
-                    Button("Demo", action: demo)
+                    Button("Refresh") {
+                        Task {
+                            let _ = await self.auth.refresh()
+                            log.info("refreshed")
+                            self.message = "refreshed"
+                        }
+                    }
+                    Button("Demo") {
+                        Task {
+                            guard let accessToken = await auth.refresh() else {
+                                log.info("unable retrieve accessToken")
+                                return
+                            }
+                            let spreadsheets = await GoogleSheets.getSpreadsheets(accessToken, "")
+                            log.info("spreadsheets: \(spreadsheets.count)")
+                            message = "\(spreadsheets.count) spreadsheets"
+                        }
+                    }
                 }
             }
             .navigationBarTitle("Settings")
-        }
-    }
-    
-    func demo() {
-        Task {
-            guard let accessToken = await auth.refresh() else {
-                log.info("unable retrieve accessToken")
-                return
-            }
-            let spreadsheets = await GoogleSheets.getSpreadsheets(accessToken, "")
-            log.info("spreadsheets: \(spreadsheets.count)")
-            message = "\(spreadsheets.count) spreadsheets"
-        }
-    }
-    
-    func renew() {
-        Task {
-            let _ = await auth.refresh()
-            log.info("refreshed")
-            message = "refreshed"
         }
     }
 }
@@ -56,5 +52,5 @@ struct SettingsTab: View {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }
-    .environment(Auth())
+    .environment(Auth.shared)
 }

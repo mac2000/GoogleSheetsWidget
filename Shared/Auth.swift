@@ -2,10 +2,19 @@ import SwiftUI
 import CryptoKit
 import SafariServices
 import OSLog
-import Shared
 
-@Observable
-class Auth {
+@Observable @MainActor public final class Auth {
+    public static let shared = Auth()
+    private init() {
+        if let refreshToken = RefreshTokenStorage.get() {
+            log.info("authenticated")
+            self.refreshToken = refreshToken
+        } else {
+            log.info("anonymous")
+            self.refreshToken = nil
+        }
+    }
+    
     private let log = Logger("Auth")
     
     private var refreshToken: String?
@@ -27,22 +36,12 @@ class Auth {
     private var isAccessTokenInvalid: Bool {
         return isAccessTokenEmpty || isAccessTokenExpired
     }
-
-    init() {
-        if let refreshToken = RefreshTokenStorage.get() {
-            log.info("authenticated")
-            self.refreshToken = refreshToken
-        } else {
-            log.info("anonymous")
-            self.refreshToken = nil
-        }
-    }
     
-    func login() -> SafariWebView {
+    public func login() -> SafariWebView {
         return SafariWebView(url: GoogleAuth.auth()!)
     }
     
-    func logout() {
+    public func logout() {
         log.info("logout")
         RefreshTokenStorage.delete()
         self.refreshToken = nil
@@ -50,7 +49,7 @@ class Auth {
         self.expirationTime = nil
     }
     
-    func refresh() async -> String? {
+    public func refresh() async -> String? {
         if !isAccessTokenInvalid {
             log.info("reusing access token")
             return accessToken
@@ -70,19 +69,17 @@ class Auth {
         return self.accessToken
     }
     
-    func exchange(_ url: URL) {
-        Task {
-            guard let response = await GoogleAuth.exchange(url) else {
-                log.warning("got nil response while exchanging code for tokens")
-                return
-            }
-            log.info("exchanged")
-            RefreshTokenStorage.set(response.refreshToken)
-            
-            self.refreshToken = response.refreshToken
-            self.accessToken = response.accessToken
-            self.expirationTime = getSafeExpirationTime(response.expiresIn)
+    public func exchange(_ url: URL) async {
+        guard let response = await GoogleAuth.exchange(url) else {
+            log.warning("got nil response while exchanging code for tokens")
+            return
         }
+        log.info("exchanged")
+        RefreshTokenStorage.set(response.refreshToken)
+        
+        self.refreshToken = response.refreshToken
+        self.accessToken = response.accessToken
+        self.expirationTime = getSafeExpirationTime(response.expiresIn)
     }
     
     private func getSafeExpirationTime(_ expiresIn: Int) -> Date? {
@@ -91,17 +88,17 @@ class Auth {
     }
 }
 
-struct SafariWebView: UIViewControllerRepresentable {
-    var url: URL
-    func makeUIViewController(context: Context) -> SFSafariViewController {
+public struct SafariWebView: UIViewControllerRepresentable {
+    let url: URL
+    public func makeUIViewController(context: Context) -> SFSafariViewController {
         return SFSafariViewController(url: url)
     }
     
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
+    public func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
     }
 }
 
-struct RefreshTokenStorage {
+final actor RefreshTokenStorage {
     static let key = "refresh_token"
 
     static func get() -> String? {

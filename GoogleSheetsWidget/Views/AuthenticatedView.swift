@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 
 struct AuthenticatedView: View {
     var body: some View {
@@ -18,5 +19,5 @@ struct AuthenticatedView: View {
 
 #Preview {
     AuthenticatedView()
-        .environment(Auth())
+        .environment(Auth.shared)
 }

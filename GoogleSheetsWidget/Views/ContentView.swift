@@ -1,4 +1,5 @@
 import SwiftUI
+import Shared
 import OSLog
 
 struct ContentView: View {
@@ -21,5 +22,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environment(Auth())
+        .environment(Auth.shared)
 }

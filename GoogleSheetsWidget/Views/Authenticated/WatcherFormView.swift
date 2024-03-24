@@ -3,6 +3,19 @@ import SwiftData
 import Shared
 import OSLog
 
+final actor WatcherFormViewModel {
+    func loadSheets(auth: Auth, item: Watcher) async -> [String] {
+        let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+        
+        if item.spreadsheetId == "" || isPreview {
+            return GoogleSheetsPreview.sheets
+        }
+
+        guard let accessToken = await auth.refresh() else { return [] }
+        return await GoogleSheets.getSheets(accessToken, item.spreadsheetId)
+    }
+}
+
 struct WatcherFormView: View {
     let log = Logger("WatcherFormView")
     @Environment(Auth.self) var auth
@@ -11,6 +24,7 @@ struct WatcherFormView: View {
     @State var selectedSpreadsheet: Spreadsheet?
     @State var spreadsheets: [Spreadsheet] = []
     @State var sheets: [String] = []
+    @State var vm = WatcherFormViewModel()
     
     var body: some View {
         Form {
@@ -25,7 +39,7 @@ struct WatcherFormView: View {
                         item.spreadsheetId = selected.id
                         item.spreadsheetName = selected.name
                         Task {
-                            self.sheets = await self.loadSheets()
+                            self.sheets =  await vm.loadSheets(auth: auth, item: item)
                         }
                     }
                 } label: {
@@ -78,14 +92,14 @@ struct WatcherFormView: View {
             } else if !self.spreadsheets.isEmpty {
                 self.selectedSpreadsheet = self.spreadsheets[0]
             }
-            self.sheets = await loadSheets()
+            self.sheets = await vm.loadSheets(auth: auth, item: item)
             await refresh()
         }
         .refreshable { await refresh() }
         
     }
     
-    func load() async -> [Spreadsheet] {
+    @MainActor func load() async -> [Spreadsheet] {
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             return GoogleSheetsPreview.spreadsheets
         }
@@ -93,28 +107,18 @@ struct WatcherFormView: View {
         return await GoogleSheets.getSpreadsheets(accessToken, "")
     }
     
-    func loadSheets() async -> [String] {
-        if item.spreadsheetId != nil {
-            if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-                return GoogleSheetsPreview.sheets
-            }
-            guard let accessToken = await auth.refresh() else { return [] }
-            return await GoogleSheets.getSheets(accessToken, item.spreadsheetId!)
-        }
-        return []
-    }
     
-    func refresh() async {
+    
+    @MainActor func refresh() async {
         if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
             item.value = "\(Int.random(in: 0...100))"
             return
         }
         guard let accessToken = await auth.refresh() else { return }
-        if let spreadsheetId = item.spreadsheetId,
-           let sheetName = item.sheetName {
-            let value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
+        if item.spreadsheetId != "" && item.sheetName != "" {
+            let value = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
             item.setValue(value: value)
-            print("refreshed \(sheetName)!\(item.column)\(item.row): \(item.value ?? "n/a")")
+            print("refreshed \(item.sheetName)!\(item.column)\(item.row): \(item.value)")
         } else {
             print("not refreshed, some properties are empty")
         }
@@ -145,7 +149,7 @@ struct WatcherFormView: View {
                 Label("Settings", systemImage: "gear")
             }.tag(3)
         }
-        .environment(Auth())
+        .environment(Auth.shared)
         .modelContainer(container)
     } catch {
         fatalError("failed to create model container because of: \(error.localizedDescription)")

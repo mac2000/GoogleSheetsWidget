@@ -64,16 +64,16 @@ struct DataTab: View {
         }
     }
     
+    @MainActor
     func refresh() async {
         guard let accessToken = await auth.refresh() else { return }
         for item in items {
-            guard let spreadsheetId = item.spreadsheetId,
-                  let sheetName = item.sheetName else {
+            if item.spreadsheetId == "" || item.sheetName == "" {
                 log.info("skipping \(item.title)")
                 continue
             }
-            log.info("refreshed \(sheetName)!\(item.column)\(item.row): \(item.title)")
-            let value = await GoogleSheets.getValue(accessToken, spreadsheetId, sheetName, item.column, item.row)
+            log.info("refreshed \(item.sheetName)!\(item.column)\(item.row): \(item.title)")
+            let value = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
             
             item.value = value
         }
@@ -100,7 +100,7 @@ struct DataTab: View {
                 Label("Settings", systemImage: "gear")
             }.tag(3)
         }
-        .environment(Auth())
+        .environment(Auth.shared)
         .modelContainer(container)
     } catch {
         fatalError("failed to create model container because of: \(error.localizedDescription)")

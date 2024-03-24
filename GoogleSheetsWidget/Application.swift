@@ -4,12 +4,16 @@ import Shared
 
 @main
 struct Application: App {
-    let auth = Auth()
+    //let auth = Auth()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(auth)
-                .onOpenURL(perform: auth.exchange)
+                .environment(Auth.shared)
+                .onOpenURL(perform: { url in
+                    Task {
+                        await Auth.shared.exchange(url)
+                    }
+                })
                 .modelContainer(for: Watcher.self)
         }
     }

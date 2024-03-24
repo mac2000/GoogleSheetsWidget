@@ -1,7 +1,7 @@
 import Foundation
 import OSLog
 
-public class GoogleSheets {
+public final actor GoogleSheets: Sendable {
     private static let log = Logger("GoogleSheets")
     
     public static func getSpreadsheets(_ accessToken: String, _ search: String) async -> [Spreadsheet] {
@@ -42,7 +42,7 @@ public class GoogleSheets {
     }
 }
 
-public class GoogleSheetsPreview {
+public struct GoogleSheetsPreview {
     public static let spreadsheets: [Spreadsheet] = [
         Spreadsheet(id: "1", name: "Demo"),
         Spreadsheet(id: "2", name: "Hello"),
@@ -56,7 +56,7 @@ struct GetSpreadsheetsResponse: Codable {
     let files: [Spreadsheet]
 }
 
-public struct Spreadsheet: Codable, Identifiable, Hashable {
+public struct Spreadsheet: Codable, Identifiable, Hashable, Sendable {
     public let id: String
     public let name: String
     
