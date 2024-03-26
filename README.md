@@ -4,7 +4,7 @@
 
 We are working with `Spreadsheets`, each has some `Sheets` containing many `Cells`
 
-```memaid
+```mermaid
 classDiagram
     Spreadsheet --> Sheet : has many
     Sheet --> Cell : has many
