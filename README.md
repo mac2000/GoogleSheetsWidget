@@ -23,8 +23,17 @@ classDiagram
 
 ## Views
 
-- **MainView** displays list of cells we are tracking and their current values
-- **FormView** displays a form allowing us to switch to different sheet and edit cells we are watching
+```mermaid
+flowchart TD
+    ContentView --> auth{auth}
+    auth -->|no| AnonymousView
+    auth -->|yes| AuthenticatedView
+    AuthenticatedView --> TabView
+    TabView --> DataTab
+    TabView --> WidgetsTab
+    TabView --> SettingsTab
+    DataTab -->|navigation stack| WatcherFormView
+```
 
 ## Google
 
