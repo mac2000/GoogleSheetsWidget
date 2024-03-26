@@ -9,12 +9,8 @@
 /* Begin PBXBuildFile section */
 		043DD5BE2BADE8820036649D /* SpreadsheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DD5BD2BADE8820036649D /* SpreadsheetPicker.swift */; };
 		043DD5C12BAEB7E00036649D /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043DD5C02BAEB7E00036649D /* CellView.swift */; };
-		0444B2162BAF7708008B4CAD /* ObservableActors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B2152BAF7708008B4CAD /* ObservableActors.swift */; };
 		0444B21A2BB006A4008B4CAD /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B2192BB006A4008B4CAD /* Auth.swift */; };
-		0444B21C2BB00C7E008B4CAD /* DISamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B21B2BB00C7E008B4CAD /* DISamples.swift */; };
-		0444B21E2BB01AA8008B4CAD /* AsyncViewFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B21D2BB01AA8008B4CAD /* AsyncViewFuncs.swift */; };
 		0444B2212BB0210F008B4CAD /* Watcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B2202BB0210F008B4CAD /* Watcher.swift */; };
-		0444B2252BB03A55008B4CAD /* NumberExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444B2242BB03A55008B4CAD /* NumberExtractor.swift */; };
 		04490B562BA46AB5009E5034 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B552BA46AB5009E5034 /* Application.swift */; };
 		04490B582BA46AB5009E5034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04490B572BA46AB5009E5034 /* ContentView.swift */; };
 		04490B5A2BA46AB7009E5034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04490B592BA46AB7009E5034 /* Assets.xcassets */; };
@@ -29,11 +25,6 @@
 		048DD1402BA8E4C30064F663 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD13F2BA8E4C30064F663 /* Logger.swift */; };
 		048DD1432BA96CA10064F663 /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1422BA96CA10064F663 /* GoogleAuth.swift */; };
 		048DD1452BAA21F70064F663 /* GoogleSheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1442BAA21F70064F663 /* GoogleSheets.swift */; };
-		048DD1472BAA39B10064F663 /* SubListsDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1462BAA39B10064F663 /* SubListsDemo.swift */; };
-		048DD1492BAB8F6C0064F663 /* DeletePreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DD1482BAB8F6C0064F663 /* DeletePreventer.swift */; };
-		048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */; };
-		049938862BAD643C00596109 /* GridLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049938852BAD643C00596109 /* GridLikeView.swift */; };
-		049938882BAD6ACA00596109 /* GridPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049938872BAD6ACA00596109 /* GridPreview.swift */; };
 		04E41C692BA473460095C411 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C682BA473460095C411 /* WidgetKit.framework */; };
 		04E41C6B2BA473460095C411 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04E41C6A2BA473460095C411 /* SwiftUI.framework */; };
 		04E41C6E2BA473460095C411 /* WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C6D2BA473460095C411 /* WidgetsBundle.swift */; };
@@ -46,10 +37,6 @@
 		04E41C8E2BA4A6340095C411 /* DataTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C8D2BA4A6340095C411 /* DataTab.swift */; };
 		04E41CDD2BA571E20095C411 /* WidgetsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41CDC2BA571E20095C411 /* WidgetsTab.swift */; };
 		04E41D432BA5B6BE0095C411 /* WatcherFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41D422BA5B6BE0095C411 /* WatcherFormView.swift */; };
-		04E41D6C2BA6E2FC0095C411 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41D6B2BA6E2FC0095C411 /* CustomPicker.swift */; };
-		04E41D6E2BA6F3D60095C411 /* SpreadsheetNavigationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41D6D2BA6F3D60095C411 /* SpreadsheetNavigationPicker.swift */; };
-		04E41D702BA6FF970095C411 /* PreviewApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41D6F2BA6FF970095C411 /* PreviewApi.swift */; };
-		04E41D722BA7236C0095C411 /* CustomForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41D712BA7236C0095C411 /* CustomForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,12 +89,8 @@
 /* Begin PBXFileReference section */
 		043DD5BD2BADE8820036649D /* SpreadsheetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetPicker.swift; sourceTree = "<group>"; };
 		043DD5C02BAEB7E00036649D /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
-		0444B2152BAF7708008B4CAD /* ObservableActors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableActors.swift; sourceTree = "<group>"; };
 		0444B2192BB006A4008B4CAD /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		0444B21B2BB00C7E008B4CAD /* DISamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DISamples.swift; sourceTree = "<group>"; };
-		0444B21D2BB01AA8008B4CAD /* AsyncViewFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncViewFuncs.swift; sourceTree = "<group>"; };
 		0444B2202BB0210F008B4CAD /* Watcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watcher.swift; sourceTree = "<group>"; };
-		0444B2242BB03A55008B4CAD /* NumberExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtractor.swift; sourceTree = "<group>"; };
 		04490B532BA46AB5009E5034 /* GoogleSheetsWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSheetsWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04490B552BA46AB5009E5034 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		04490B572BA46AB5009E5034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,11 +105,6 @@
 		048DD13F2BA8E4C30064F663 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		048DD1422BA96CA10064F663 /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
 		048DD1442BAA21F70064F663 /* GoogleSheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSheets.swift; sourceTree = "<group>"; };
-		048DD1462BAA39B10064F663 /* SubListsDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListsDemo.swift; sourceTree = "<group>"; };
-		048DD1482BAB8F6C0064F663 /* DeletePreventer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePreventer.swift; sourceTree = "<group>"; };
-		048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableNavigationLink.swift; sourceTree = "<group>"; };
-		049938852BAD643C00596109 /* GridLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLikeView.swift; sourceTree = "<group>"; };
-		049938872BAD6ACA00596109 /* GridPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPreview.swift; sourceTree = "<group>"; };
 		04E41C662BA473460095C411 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E41C682BA473460095C411 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		04E41C6A2BA473460095C411 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -144,10 +122,6 @@
 		04E41CDC2BA571E20095C411 /* WidgetsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsTab.swift; sourceTree = "<group>"; };
 		04E41D422BA5B6BE0095C411 /* WatcherFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatcherFormView.swift; sourceTree = "<group>"; };
 		04E41D692BA6D1EA0095C411 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		04E41D6B2BA6E2FC0095C411 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
-		04E41D6D2BA6F3D60095C411 /* SpreadsheetNavigationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetNavigationPicker.swift; sourceTree = "<group>"; };
-		04E41D6F2BA6FF970095C411 /* PreviewApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewApi.swift; sourceTree = "<group>"; };
-		04E41D712BA7236C0095C411 /* CustomForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +206,6 @@
 				04E41C892BA48C750095C411 /* Info.plist */,
 				04490B552BA46AB5009E5034 /* Application.swift */,
 				04490B592BA46AB7009E5034 /* Assets.xcassets */,
-				04E41D6A2BA6E2EB0095C411 /* Playgrounds */,
 				04490B5B2BA46AB7009E5034 /* Preview Content */,
 				04E41C7F2BA47B7C0095C411 /* Views */,
 			);
@@ -331,26 +304,6 @@
 				04E41CDC2BA571E20095C411 /* WidgetsTab.swift */,
 			);
 			path = Authenticated;
-			sourceTree = "<group>";
-		};
-		04E41D6A2BA6E2EB0095C411 /* Playgrounds */ = {
-			isa = PBXGroup;
-			children = (
-				04E41D6B2BA6E2FC0095C411 /* CustomPicker.swift */,
-				04E41D6D2BA6F3D60095C411 /* SpreadsheetNavigationPicker.swift */,
-				04E41D6F2BA6FF970095C411 /* PreviewApi.swift */,
-				04E41D712BA7236C0095C411 /* CustomForm.swift */,
-				048FB4B42BA760060062EE05 /* DismissableNavigationLink.swift */,
-				048DD1462BAA39B10064F663 /* SubListsDemo.swift */,
-				048DD1482BAB8F6C0064F663 /* DeletePreventer.swift */,
-				049938852BAD643C00596109 /* GridLikeView.swift */,
-				049938872BAD6ACA00596109 /* GridPreview.swift */,
-				0444B2152BAF7708008B4CAD /* ObservableActors.swift */,
-				0444B21B2BB00C7E008B4CAD /* DISamples.swift */,
-				0444B21D2BB01AA8008B4CAD /* AsyncViewFuncs.swift */,
-				0444B2242BB03A55008B4CAD /* NumberExtractor.swift */,
-			);
-			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,25 +433,12 @@
 				04490B582BA46AB5009E5034 /* ContentView.swift in Sources */,
 				04E41CDD2BA571E20095C411 /* WidgetsTab.swift in Sources */,
 				04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */,
-				04E41D6E2BA6F3D60095C411 /* SpreadsheetNavigationPicker.swift in Sources */,
-				0444B21C2BB00C7E008B4CAD /* DISamples.swift in Sources */,
-				04E41D6C2BA6E2FC0095C411 /* CustomPicker.swift in Sources */,
-				0444B21E2BB01AA8008B4CAD /* AsyncViewFuncs.swift in Sources */,
-				04E41D702BA6FF970095C411 /* PreviewApi.swift in Sources */,
 				04E41C8C2BA49B2D0095C411 /* SettingsTab.swift in Sources */,
-				0444B2252BB03A55008B4CAD /* NumberExtractor.swift in Sources */,
-				048FB4B52BA760060062EE05 /* DismissableNavigationLink.swift in Sources */,
 				043DD5BE2BADE8820036649D /* SpreadsheetPicker.swift in Sources */,
-				049938882BAD6ACA00596109 /* GridPreview.swift in Sources */,
 				04E41C8E2BA4A6340095C411 /* DataTab.swift in Sources */,
 				04E41D432BA5B6BE0095C411 /* WatcherFormView.swift in Sources */,
-				048DD1472BAA39B10064F663 /* SubListsDemo.swift in Sources */,
 				04E41C862BA487FC0095C411 /* AnonymousView.swift in Sources */,
 				04490B562BA46AB5009E5034 /* Application.swift in Sources */,
-				048DD1492BAB8F6C0064F663 /* DeletePreventer.swift in Sources */,
-				0444B2162BAF7708008B4CAD /* ObservableActors.swift in Sources */,
-				04E41D722BA7236C0095C411 /* CustomForm.swift in Sources */,
-				049938862BAD643C00596109 /* GridLikeView.swift in Sources */,
 				043DD5C12BAEB7E00036649D /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

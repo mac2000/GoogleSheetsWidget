@@ -1,6 +1,6 @@
 import SwiftUI
 import SwiftData
-@preconcurrency import Shared
+import Shared
 
 struct SpreadsheetPicker: View {
     var onSelect: (Spreadsheet) -> Void
