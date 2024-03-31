@@ -4,33 +4,56 @@ import SwiftData
 import SwiftUI
 import Shared
 
+struct WidgetAlphaCell {
+    let title: String
+    let value: String
+}
 
 struct WidgetAlphaEntry: TimelineEntry {
     let date: Date
-    let value: String
+    let main: WidgetAlphaCell?
+    let row1: WidgetAlphaCell?
+    let row2: WidgetAlphaCell?
+    let row3: WidgetAlphaCell?
+    
+    var isEmpty: Bool {
+        return main == nil && row1 == nil && row2 == nil && row3 == nil
+    }
 }
 
 struct WidgetAlphaView : View {
     var entry: WidgetAlphaEntry
     var body: some View {
         VStack(alignment: .leading) {
-            Text(self.entry.value.isEmpty ? "item 0": self.entry.value).font(.caption).foregroundStyle(.secondary)
-            HStack {
-                Text("2.4%").font(.title)
-                Spacer()
-            }
-            Spacer()
-            HStack {
-                Text("1.2%")
-                Text("item 1").font(.caption).foregroundStyle(.secondary)
-            }
-            HStack {
-                Text("1.2%")
-                Text("item 1").font(.caption).foregroundStyle(.secondary)
-            }
-            HStack {
-                Text("1.2%")
-                Text("item 1").font(.caption).foregroundStyle(.secondary)
+            if self.entry.isEmpty {
+                Text("Edit widget")
+            } else {
+                if self.entry.main != nil {
+                    Text(self.entry.main!.title).font(.caption).foregroundStyle(.secondary)
+                    HStack {
+                        Text(self.entry.main!.value).font(.title)
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                if self.entry.row1 != nil {
+                    HStack {
+                        Text(self.entry.row1!.value)
+                        Text(self.entry.row1!.title).font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+                if self.entry.row2 != nil {
+                    HStack {
+                        Text(self.entry.row2!.value)
+                        Text(self.entry.row2!.title).font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+                if self.entry.row3 != nil {
+                    HStack {
+                        Text(self.entry.row3!.value)
+                        Text(self.entry.row3!.title).font(.caption).foregroundStyle(.secondary)
+                    }
+                }
             }
         }
     }
@@ -39,42 +62,74 @@ struct WidgetAlphaView : View {
 struct WidgetAlphaIntent: WidgetConfigurationIntent {
     static let title: LocalizedStringResource = "Person"
     
-    @Parameter(title: "Value")
-    var value: String?
+    @Parameter(title: "Main")
+    var main: WatcherEntity?
     
-    @Parameter(title: "First")
-    var first: WatcherEntity?
+    @Parameter(title: "Row 1")
+    var row1: WatcherEntity?
+    
+    @Parameter(title: "Row 2")
+    var row2: WatcherEntity?
+    
+    @Parameter(title: "Row 3")
+    var row3: WatcherEntity?
+    
+    var mainCell: WidgetAlphaCell? {
+        if let item = main,
+           let watcher = item.watcher {
+            return WidgetAlphaCell(title: watcher.title, value: watcher.value)
+        }
+        return nil
+    }
+    var row1Cell: WidgetAlphaCell? {
+        if let item = row1,
+           let watcher = item.watcher {
+            return WidgetAlphaCell(title: watcher.title, value: watcher.value)
+        }
+        return nil
+    }
+    var row2Cell: WidgetAlphaCell? {
+        if let item = row2,
+           let watcher = item.watcher {
+            return WidgetAlphaCell(title: watcher.title, value: watcher.value)
+        }
+        return nil
+    }
+    var row3Cell: WidgetAlphaCell? {
+        if let item = row3,
+           let watcher = item.watcher {
+            return WidgetAlphaCell(title: watcher.title, value: watcher.value)
+        }
+        return nil
+    }
 }
 
 struct WatcherEntity: AppEntity, Identifiable, Hashable {
     var id: String
-    var title: String
-    var value: String
+    var watcher: Watcher?
     
     var isEmpty: Bool {
-        return id.isEmpty && title.isEmpty && value.isEmpty
+        return id.isEmpty || watcher == nil
     }
     
     var displayTitle: LocalizedStringResource {
         return isEmpty
         ? "None"
-        :"\(title): \(value)"
+        :"\(watcher!.title): \(watcher!.value)"
     }
     
     var displayRepresentation: DisplayRepresentation {
         .init(title: displayTitle)
     }
     
-    init(id: String, title: String, value: String) {
-        self.id = id
-        self.title = title
-        self.value = value
-    }
-    
-    init(watcher: Watcher) {
-        self.id = "\(watcher.id)"
-        self.title = watcher.title
-        self.value = watcher.value
+    init(watcher: Watcher?) {
+        if let watcher = watcher {
+            self.id = "\(watcher.id)"
+            self.watcher = watcher
+        } else {
+            self.id = ""
+            self.watcher = nil
+        }
     }
 
     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Watcher")
@@ -87,7 +142,7 @@ struct WatcherEntityQuery: EntityQuery, Sendable {
             .filter { identifiers.contains("\($0.id)") }
             .map(WatcherEntity.init)
             
-        items.insert(WatcherEntity(id: "", title: "", value: ""), at: 0)
+        items.insert(WatcherEntity(watcher: nil), at: 0)
         return items
     }
 
@@ -95,7 +150,7 @@ struct WatcherEntityQuery: EntityQuery, Sendable {
         var items = fetchProducts()
             .map(WatcherEntity.init)
             
-        items.insert(WatcherEntity(id: "", title: "", value: ""), at: 0)
+        items.insert(WatcherEntity(watcher: nil), at: 0)
         return items
     }
     
@@ -122,17 +177,18 @@ struct WatcherEntityQuery: EntityQuery, Sendable {
 struct WidgetAlphaProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) ->  WidgetAlphaEntry {
         print("placeholder")
-        return WidgetAlphaEntry(date: .now, value: "plh")
+        return WidgetAlphaEntry(date: .now, main: WidgetAlphaCell(title: "sample", value: "23.4%"), row1: WidgetAlphaCell(title: "foo", value: "4"), row2: WidgetAlphaCell(title: "bar", value: "2"), row3: nil)
     }
     func snapshot(for configuration: WidgetAlphaIntent, in context: Context) async -> WidgetAlphaEntry {
         print("snapshot")
-        return WidgetAlphaEntry(date: .now, value: "snap")
+        return WidgetAlphaEntry(date: .now, main: WidgetAlphaCell(title: "sample", value: "23.4%"), row1: WidgetAlphaCell(title: "foo", value: "4"), row2: WidgetAlphaCell(title: "bar", value: "2"), row3: nil)
     }
     func timeline(for configuration: WidgetAlphaIntent, in context: Context) async -> Timeline<WidgetAlphaEntry> {
         let date = Calendar.current.date(byAdding: .hour, value: 1, to: .now)!
-        let value = configuration.value ?? "edit me"
-        let first = configuration.first?.title ?? "notitle"
-        let entry = WidgetAlphaEntry(date: date, value: first)
+        let value = configuration.main?.watcher?.title ?? "notitle"
+        let main = configuration.mainCell
+        
+        let entry = WidgetAlphaEntry(date: date, main: configuration.mainCell, row1: configuration.row1Cell, row2: configuration.row2Cell, row3: configuration.row3Cell)
         print("timeline")
         return Timeline(entries: [entry], policy: .atEnd)
     }
@@ -152,6 +208,5 @@ struct WidgetAlpha: Widget {
 #Preview(as: .systemSmall) {
     WidgetAlpha()
 } timeline: {
-    WidgetAlphaEntry(date: .now, value: "Hello")
-    WidgetAlphaEntry(date: .now, value: "World")
+    WidgetAlphaEntry(date: .now, main: WidgetAlphaCell(title: "sample", value: "23.4%"), row1: WidgetAlphaCell(title: "foo", value: "4"), row2: WidgetAlphaCell(title: "bar", value: "2"), row3: nil)
 }
