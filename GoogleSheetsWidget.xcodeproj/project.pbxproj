@@ -36,7 +36,6 @@
 		04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C872BA4881C0095C411 /* AuthenticatedView.swift */; };
 		04E41C8C2BA49B2D0095C411 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C8B2BA49B2D0095C411 /* SettingsTab.swift */; };
 		04E41C8E2BA4A6340095C411 /* DataTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41C8D2BA4A6340095C411 /* DataTab.swift */; };
-		04E41CDD2BA571E20095C411 /* WidgetsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41CDC2BA571E20095C411 /* WidgetsTab.swift */; };
 		04E41D432BA5B6BE0095C411 /* WatcherFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E41D422BA5B6BE0095C411 /* WatcherFormView.swift */; };
 /* End PBXBuildFile section */
 
@@ -121,7 +120,6 @@
 		04E41C892BA48C750095C411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		04E41C8B2BA49B2D0095C411 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		04E41C8D2BA4A6340095C411 /* DataTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTab.swift; sourceTree = "<group>"; };
-		04E41CDC2BA571E20095C411 /* WidgetsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsTab.swift; sourceTree = "<group>"; };
 		04E41D422BA5B6BE0095C411 /* WatcherFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatcherFormView.swift; sourceTree = "<group>"; };
 		04E41D692BA6D1EA0095C411 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,7 +302,6 @@
 				04E41C8D2BA4A6340095C411 /* DataTab.swift */,
 				04E41C8B2BA49B2D0095C411 /* SettingsTab.swift */,
 				04E41D422BA5B6BE0095C411 /* WatcherFormView.swift */,
-				04E41CDC2BA571E20095C411 /* WidgetsTab.swift */,
 			);
 			path = Authenticated;
 			sourceTree = "<group>";
@@ -434,7 +431,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04490B582BA46AB5009E5034 /* ContentView.swift in Sources */,
-				04E41CDD2BA571E20095C411 /* WidgetsTab.swift in Sources */,
 				04E41C882BA4881C0095C411 /* AuthenticatedView.swift in Sources */,
 				04E41C8C2BA49B2D0095C411 /* SettingsTab.swift in Sources */,
 				043DD5BE2BADE8820036649D /* SpreadsheetPicker.swift in Sources */,

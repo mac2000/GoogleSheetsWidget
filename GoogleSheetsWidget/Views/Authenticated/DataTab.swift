@@ -93,12 +93,9 @@ struct DataTab: View {
             DataTab().tabItem {
                 Label("Data", systemImage: "doc.text")
             }.tag(1)
-            WidgetsTab().tabItem {
-                Label("Widgets", systemImage: "square.grid.3x2")
-            }.tag(2)
             SettingsTab().tabItem {
                 Label("Settings", systemImage: "gear")
-            }.tag(3)
+            }.tag(2)
         }
         .environment(Auth.shared)
         .modelContainer(container)
