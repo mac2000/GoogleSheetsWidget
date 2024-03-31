@@ -12,6 +12,8 @@ struct WatcherFormView: View {
     @State var spreadsheets: [Spreadsheet] = []
     @State var sheets: [String] = []
     
+    var onSubmit: (Watcher) -> Void
+    
     var body: some View {
         Form {
             Section("General") {
@@ -51,12 +53,16 @@ struct WatcherFormView: View {
                     ForEach(columns, id: \.self) { column in
                         Text(column)
                     }
+                }.onChange(of: item.column) { _, _ in
+                    Task { await refresh() }
                 }
                 
                 Picker("Row", selection: $item.row) {
                     ForEach(1...30, id: \.self) { row in
                         Text("\(row)")
                     }
+                }.onChange(of: item.row) { _, _ in
+                    Task { await refresh() }
                 }
                 
                 Toggle("Colored", isOn: $item.colored)
@@ -66,7 +72,7 @@ struct WatcherFormView: View {
                 CellView(item: item)
             }
         }
-        .navigationTitle("Track")
+        .navigationTitle(item.modelContext == nil ? "Create" : "Edit")
         .navigationBarTitleDisplayMode(.inline)
         .task {
             self.spreadsheets = await load()
@@ -84,6 +90,9 @@ struct WatcherFormView: View {
         .refreshable { await refresh() }
         .onChange(of: item) { _, _ in
             Task { await refresh() }
+        }
+        .onDisappear {
+            onSubmit(item)
         }
         
     }
@@ -136,7 +145,7 @@ struct WatcherFormView: View {
         
         return TabView(selection: .constant(1)) {
             NavigationStack {
-                WatcherFormView(item: Watcher.example1)
+                WatcherFormView(item: Watcher.example1) { _ in }
             }.tabItem {
                 Label("Data", systemImage: "doc.text")
             }.tag(1)

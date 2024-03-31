@@ -1,28 +1,26 @@
 import SwiftUI
+import SwiftData
 import Shared
+import WidgetKit
+
 
 struct WidgetsTab: View {
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Settings") {
-                    Text("TODO")
-                }
-            }
-            .navigationTitle("Widgets")
+            Text("TODO")
         }
     }
 }
 
 #Preview {
     TabView(selection: .constant(2)) {
-        DataTab().tabItem {
+        Text("Data").tabItem {
             Label("Data", systemImage: "doc.text")
         }.tag(1)
         WidgetsTab().tabItem {
             Label("Widgets", systemImage: "square.grid.3x2")
         }.tag(2)
-        SettingsTab().tabItem {
+        Text("Settings").tabItem {
             Label("Settings", systemImage: "gear")
         }.tag(3)
     }

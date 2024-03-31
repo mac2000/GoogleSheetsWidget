@@ -9,10 +9,7 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct Provider: TimelineProvider {
-    //let auth = Auth()
     let auth = Auth.shared
-    
-    @Query(sort: \Watcher.title) var items: [Watcher]
     
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), value: [])
@@ -91,6 +88,7 @@ struct Widgets: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
+        .supportedFamilies([.systemSmall])
     }
 }
 

@@ -9,10 +9,9 @@ struct DataTab: View {
     @Environment(Auth.self) var auth
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Watcher.title) var items: [Watcher]
-    @State private var path = NavigationPath()
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack {
             List {
                 Section("Tracking") {
                     ForEach(items) { item in
@@ -25,7 +24,9 @@ struct DataTab: View {
                 
             }
             .toolbar {
-                Button("Add", systemImage: "plus", action: add)
+                NavigationLink(value: Watcher(title: "", spreadsheetId: "", spreadsheetName: "", sheetName: "", column: "", row: 1)) {
+                    Text("Add")
+                }
             }
             .overlay {
                 if items.isEmpty {
@@ -40,22 +41,19 @@ struct DataTab: View {
             }
             .navigationTitle("Data")
             .navigationDestination(for: Watcher.self) { item in
-                WatcherFormView(item: item)
-            }
-            .onAppear {
-                for item in items {
-                    if item.isEmpty {
+                WatcherFormView(item: item) { item in
+                    if item.modelContext == nil && !item.isEmpty {
+                        modelContext.insert(item) // technically only this needed
+                        print("\(item.title) - created")
+                    } else if item.modelContext != nil && !item.isEmpty {
+                        print("\(item.title) - edited")
+                    } else if item.modelContext != nil && item.isEmpty {
                         modelContext.delete(item)
+                        print("\(item.title) - deleted empty item")
                     }
                 }
             }
         }
-    }
-    
-    func add() {
-        let item = Watcher(title: "", spreadsheetId: "", spreadsheetName: "", sheetName: "Sheet1", column: "A", row: 1)
-        modelContext.insert(item)
-        path.append(item)
     }
     
     func delete(_ indexSet: IndexSet) {
