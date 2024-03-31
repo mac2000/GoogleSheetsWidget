@@ -51,8 +51,18 @@ struct WatcherEntity: AppEntity, Identifiable, Hashable {
     var title: String
     var value: String
     
+    var isEmpty: Bool {
+        return id.isEmpty && title.isEmpty && value.isEmpty
+    }
+    
+    var displayTitle: LocalizedStringResource {
+        return isEmpty
+        ? "None"
+        :"\(title): \(value)"
+    }
+    
     var displayRepresentation: DisplayRepresentation {
-        .init(title: "\(title): \(value)")
+        .init(title: displayTitle)
     }
     
     init(id: String, title: String, value: String) {
@@ -73,13 +83,20 @@ struct WatcherEntity: AppEntity, Identifiable, Hashable {
 
 struct WatcherEntityQuery: EntityQuery, Sendable {
     func entities(for identifiers: [WatcherEntity.ID]) async throws -> [WatcherEntity] {
-        return fetchProducts()
+        var items = fetchProducts()
             .filter { identifiers.contains("\($0.id)") }
             .map(WatcherEntity.init)
+            
+        items.insert(WatcherEntity(id: "", title: "", value: ""), at: 0)
+        return items
     }
 
     func suggestedEntities() async throws -> [WatcherEntity] {
-        return fetchProducts().map(WatcherEntity.init)
+        var items = fetchProducts()
+            .map(WatcherEntity.init)
+            
+        items.insert(WatcherEntity(id: "", title: "", value: ""), at: 0)
+        return items
     }
     
     private static let container: ModelContainer = {
