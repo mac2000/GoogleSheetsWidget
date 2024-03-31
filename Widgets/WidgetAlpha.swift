@@ -113,47 +113,47 @@ struct WatcherEntity: AppEntity, Identifiable, Hashable {
             self.watcher = nil
         }
     }
-
+    
     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Watcher")
     static var defaultQuery = WatcherEntityQuery()
 }
 
 struct WatcherEntityQuery: EntityQuery, Sendable {
     func entities(for identifiers: [WatcherEntity.ID]) async throws -> [WatcherEntity] {
-        var items = fetchProducts()
+        var items = fetch()
             .filter { identifiers.contains("\($0.id)") }
             .map(WatcherEntity.init)
-            
+        
         items.insert(WatcherEntity(watcher: nil), at: 0)
         return items
     }
-
+    
     func suggestedEntities() async throws -> [WatcherEntity] {
-        var items = fetchProducts()
+        var items = fetch()
             .map(WatcherEntity.init)
-            
+        
         items.insert(WatcherEntity(watcher: nil), at: 0)
         return items
     }
     
     private static let container: ModelContainer = {
-            do {
-                return try ModelContainer(for: Watcher.self)
-            } catch {
-                fatalError("\(error)")
-            }
-        }()
-    
-    private func fetchProducts() -> [Watcher] {
-            do {
-                let context = ModelContext(Self.container)
-                let items = try context.fetch(FetchDescriptor<Watcher>())
-                return items
-            } catch {
-                print("Error fetching products: \(error)")
-                return []
-            }
+        do {
+            return try ModelContainer(for: Watcher.self)
+        } catch {
+            fatalError("\(error)")
         }
+    }()
+    
+    private func fetch() -> [Watcher] {
+        do {
+            let context = ModelContext(Self.container)
+            let items = try context.fetch(FetchDescriptor<Watcher>())
+            return items
+        } catch {
+            print("Error fetching products: \(error)")
+            return []
+        }
+    }
 }
 
 struct WidgetAlphaProvider: AppIntentTimelineProvider {
@@ -167,10 +167,43 @@ struct WidgetAlphaProvider: AppIntentTimelineProvider {
         return WidgetAlphaEntry(date: .now, main: Watcher.example1, row1: Watcher.example2, row2: Watcher.example3, row3: nil)
     }
     func timeline(for configuration: WidgetAlphaIntent, in context: Context) async -> Timeline<WidgetAlphaEntry> {
+        let items = await refresh()
         let date = Calendar.current.date(byAdding: .hour, value: 1, to: .now)!
         let entry = WidgetAlphaEntry(date: date, main: configuration.main?.watcher, row1: configuration.row1?.watcher, row2: configuration.row2?.watcher, row3: configuration.row3?.watcher)
         print("timeline")
         return Timeline(entries: [entry], policy: .atEnd)
+    }
+    private static let container: ModelContainer = {
+        do {
+            return try ModelContainer(for: Watcher.self)
+        } catch {
+            fatalError("\(error)")
+        }
+    }()
+    
+    private func fetch() -> [Watcher] {
+        do {
+            let context = ModelContext(Self.container)
+            let items = try context.fetch(FetchDescriptor<Watcher>())
+            return items
+        } catch {
+            print("Error fetching products: \(error)")
+            return []
+        }
+    }
+    
+    private func refresh() async -> [Watcher] {
+        var items = fetch()
+        guard let accessToken = await Auth.shared.refresh() else {
+            return items
+        }
+        for item in items {
+            let value = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
+            if value != "" && value != "Loading..." {
+                item.value = value
+            }
+        }
+        return items
     }
 }
 
