@@ -53,10 +53,10 @@ public final class Watcher: Sendable {
     public func setValue(value: String) {
         self.value = value
     }
-    
-    #if DEBUG
+}
+
+extension Watcher {
     public static let example1 = Watcher(title: "Hello", spreadsheetId: "1", spreadsheetName: "Demo", sheetName: "Sheet1", column: "A", row: 1)
     public static let example2 = Watcher(title: "World", spreadsheetId: "1", spreadsheetName: "Demo", sheetName: "Sheet1", column: "A", row: 2)
     public static let example3 = Watcher(title: "Demo", spreadsheetId: "2", spreadsheetName: "Sample", sheetName: "Sheet1", column: "A", row: 1)
-    #endif
 }

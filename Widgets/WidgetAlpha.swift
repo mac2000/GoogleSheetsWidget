@@ -212,6 +212,7 @@ struct WidgetAlpha: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: "WidgetAlpha", intent: WidgetAlphaIntent.self, provider: WidgetAlphaProvider()) { entry in
             WidgetAlphaView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
         }
         .configurationDisplayName("Alpha")
         .supportedFamilies([.systemSmall, .systemMedium])
