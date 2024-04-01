@@ -168,7 +168,26 @@ struct WidgetAlphaProvider: AppIntentTimelineProvider {
     }
     func timeline(for configuration: WidgetAlphaIntent, in context: Context) async -> Timeline<WidgetAlphaEntry> {
         let items = await refresh()
+        for item in items {
+            if item.eq(item: configuration.main?.watcher) {
+                print("main: \(item.value)")
+                configuration.main?.watcher?.value = item.value
+            }
+            if item.eq(item: configuration.row1?.watcher) {
+                print("row1: \(item.value)")
+                configuration.row1?.watcher?.value = item.value
+            }
+            if item.eq(item: configuration.row2?.watcher) {
+                print("row2: \(item.value)")
+                configuration.row2?.watcher?.value = item.value
+            }
+            if item.eq(item: configuration.row3?.watcher) {
+                print("row3: \(item.value)")
+                configuration.row3?.watcher?.value = item.value
+            }
+        }
         let date = Calendar.current.date(byAdding: .hour, value: 1, to: .now)!
+        
         let entry = WidgetAlphaEntry(date: date, main: configuration.main?.watcher, row1: configuration.row1?.watcher, row2: configuration.row2?.watcher, row3: configuration.row3?.watcher)
         print("timeline")
         return Timeline(entries: [entry], policy: .atEnd)

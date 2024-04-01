@@ -50,9 +50,15 @@ public final class Watcher: Sendable {
         self.colored = false
     }
     
-    public func setValue(value: String) {
-        self.value = value
+    public func eq(item: Watcher?) -> Bool {
+        guard let item = item else { return false }
+        if self.spreadsheetId != item.spreadsheetId {return false}
+        if self.sheetName != item.sheetName {return false}
+        if self.column != item.column {return false}
+        if self.row != item.row {return false}
+        return true
     }
+    
 }
 
 extension Watcher {
