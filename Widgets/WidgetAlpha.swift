@@ -28,6 +28,8 @@ struct WidgetAlphaView : View {
                         .textCase(.uppercase)
                     HStack {
                         Text(cell.value).font(.title).foregroundStyle(cell.color)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
                         Spacer()
                     }
                     Spacer()
