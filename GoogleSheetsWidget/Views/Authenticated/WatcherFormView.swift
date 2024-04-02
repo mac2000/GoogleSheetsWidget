@@ -124,7 +124,7 @@ struct WatcherFormView: View {
         guard let accessToken = await auth.refresh() else { return }
         if item.spreadsheetId != "" && item.sheetName != "" {
             let value = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
-            item.value = value
+            item.setValue(value: value)
             print("refreshed \(item.sheetName)!\(item.column)\(item.row): \(item.value)")
         } else {
             print("not refreshed, some properties are empty")

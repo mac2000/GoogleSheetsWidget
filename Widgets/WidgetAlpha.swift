@@ -212,14 +212,14 @@ struct WidgetAlphaProvider: AppIntentTimelineProvider {
     }
     
     private func refresh() async -> [Watcher] {
-        var items = fetch()
+        let items = fetch()
         guard let accessToken = await Auth.shared.refresh() else {
             return items
         }
         for item in items {
             let value = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
             if value != "" && value != "Loading..." {
-                item.value = value
+                item.setValue(value: value)
             }
         }
         return items

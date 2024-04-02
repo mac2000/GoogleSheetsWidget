@@ -8,10 +8,14 @@ struct AnonymousView: View {
     @State private var isVisible = false
     var body: some View {
         VStack(spacing:20) {
-            Image(systemName: "lock").imageScale(.large).foregroundStyle(.tint)
-            Text("Anonymous")
-            // Link("Login", destination: url)
+            Image("Logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width:200)
+            Text("Sign in to start tracking")
             Button("Login") { isVisible.toggle() }.popover(isPresented: $isVisible, content: auth.login)
+                .buttonStyle(.borderedProminent)
+            Text("You will be promted by Google login.").foregroundStyle(.secondary)
         }
     }
     

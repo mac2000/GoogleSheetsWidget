@@ -74,7 +74,7 @@ struct DataTab: View {
             log.info("refreshed \(item.sheetName)!\(item.column)\(item.row): \(item.title) - \(item.value)")
             let value = await GoogleSheets.getValue(accessToken, item.spreadsheetId, item.sheetName, item.column, item.row)
             
-            item.value = value
+            item.setValue(value: value)
         }
         WidgetCenter.shared.reloadAllTimelines()
     }

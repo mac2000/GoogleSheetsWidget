@@ -19,6 +19,10 @@ public final class Watcher: Sendable {
         return title.isEmpty  || spreadsheetName == "" || sheetName == ""
     }
     
+    public func setValue(value: String) {
+        self.value = value
+    }
+    
     public var color: Color {
         if self.value == "" {
             return .secondary
