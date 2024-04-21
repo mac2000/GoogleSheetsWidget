@@ -1,5 +1,15 @@
 # Google Sheets Widget
 
+Google Sheets Widget app allow you to track your spreadsheets right inside your iOS
+
+Here is how short video of hot it will look like
+
+[![demo](https://img.youtube.com/vi/_TSAgsGCIwk/0.jpg)](https://www.youtube.com/watch?v=_TSAgsGCIwk)
+
+## Privacy
+
+The app does not collect and store any personal information.
+
 ## Data Model
 
 We are working with `Spreadsheets`, each has some `Sheets` containing many `Cells`
